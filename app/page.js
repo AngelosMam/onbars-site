@@ -11,8 +11,8 @@ export default function Home() {
         <Image
           src="/logo.png"
           alt="OnBars Logo"
-          width={90}
-          height={90}
+          width={300}
+          height={300}
           className="mb-6"
         />
 
@@ -105,9 +105,18 @@ export default function Home() {
             height={500}
             className="rounded-xl"
           />
+          
 
           <Image
             src="/screen3.png"
+            alt="Park Screen"
+            width={250}
+            height={500}
+            className="rounded-xl"
+          />
+
+          <Image
+            src="/screen4.png"
             alt="Park Screen"
             width={250}
             height={500}
@@ -131,10 +140,10 @@ export default function Home() {
           Be one of the first athletes testing OnBars.
         </p>
 
-        <input
-          placeholder="Enter your email"
-          className="px-4 py-3 rounded text-black w-72 mr-2"
-        />
+       <input
+  placeholder="Enter your email"
+  className="px-4 py-3 rounded bg-zinc-800 text-white w-72 mr-2 outline-none border border-zinc-700 focus:border-white"
+/>
 
         <button className="bg-white text-black px-6 py-3 rounded font-semibold">
           Join
