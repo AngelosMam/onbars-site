@@ -6,23 +6,23 @@ export default function Home() {
 
       {/* HERO SECTION */}
 
-      <section className="flex flex-col items-center justify-center text-center px-6 pt-24 pb-16">
+      <section className="flex flex-col items-center justify-center text-center px-6 pt-24 pb-4">
 
         <Image
           src="/logo.png"
           alt="OnBars Logo"
           width={300}
           height={300}
-          className="mb-6"
+          className="mb-6 drop-shadow-xl"
         />
 
-        <h1 className="text-5xl font-bold mb-6">
+        <h1 className="text-6xl font-bold mb-6 tracking-tight">
           OnBars
         </h1>
 
         <p className="text-gray-400 max-w-xl text-lg mb-8">
-          Discover outdoor gyms near you, track your workouts
-          and spread your aura on bars around the world.
+          Discover calisthenics parks near you, track your workouts
+          and compete with other athletes by spreading your Aura across the map.
         </p>
 
         <div className="flex gap-4">
@@ -48,7 +48,7 @@ export default function Home() {
 
       {/* FEATURES */}
 
-      <section className="grid md:grid-cols-3 gap-8 px-10 py-16 max-w-6xl mx-auto">
+      <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-10 py-16 max-w-6xl mx-auto">
 
         <div className="bg-zinc-900 p-6 rounded-xl">
           <h3 className="text-xl font-semibold mb-3">
@@ -67,15 +67,28 @@ export default function Home() {
             Log your sets, reps and exercises directly from the park.
           </p>
         </div>
+        
 
         <div className="bg-zinc-900 p-6 rounded-xl">
           <h3 className="text-xl font-semibold mb-3">
             Community
           </h3>
           <p className="text-gray-400">
-            See other athletes training nearby and join challenges.
+            See what's happening nearby in the bars world, discover local athletes, posts and game events through the Bars Feed.
           </p>
         </div>
+
+        <div className="bg-zinc-900 p-6 rounded-xl">
+  <h3 className="text-xl font-semibold mb-3">
+    Aura & Gamification
+  </h3>
+  <p className="text-gray-400">
+    Level up your Aura, and claim outdoor gyms. 
+    Leaders can paint gym pins with their Aura color, dominate the map and unlock features.
+  </p>
+</div>
+
+        
 
       </section>
 
@@ -137,7 +150,7 @@ export default function Home() {
         </h2>
 
         <p className="text-gray-400 mb-6">
-          Be one of the first athletes testing OnBars.
+          Limited spots available for early athletes.
         </p>
 
        <input
@@ -150,6 +163,20 @@ export default function Home() {
         </button>
 
       </section>
+     <section className="max-w-3xl mx-auto px-6 pb-24 text-center">
+
+  <h2 className="text-3xl font-bold mb-6">
+    About OnBars
+  </h2>
+
+  <p className="text-gray-500 leading-relaxed text-md italic">
+    <strong className="text-white">OnBars</strong> started with a simple goal: build the ultimate calisthenics app for athletes training on bars around the world. 
+    We wanted more than just a workout tracker — we wanted a platform where athletes can discover calisthenics parks, track their progress and connect with the global calisthenics community. 
+    OnBars is also designed to feel like a game. Level up your Aura and compete with other athletes by claiming calisthenics parks and spreading your Aura across the map. 
+    We’ve poured our passion, time and energy into building this project, and during the beta your feedback will help shape the future of <strong className="text-white">OnBars</strong>.
+  </p>
+
+</section>
 
 
       {/* FOOTER */}
