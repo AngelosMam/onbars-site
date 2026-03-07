@@ -132,7 +132,7 @@ export default function Home() {
             { 
               title: "4. Global Feed", 
               desc: "Stay updated with local athletes, posts, and community events through the Bars Feed.",
-              color: "hover:border-orange-500/50"
+              color: "hover:border-pink-500/50"
             }
           ].map((feature, index) => (
             <motion.div 
@@ -163,8 +163,8 @@ export default function Home() {
   {[
     { src: "/screen1.png", color: "from-blue-500 to-cyan-400" },
     { src: "/screen2.png", color: "from-green-500 to-green-400" },
-    { src: "/screen3.png", color: "from-purple-500 to-pink-400" },
-    { src: "/screen4.png", color: "from-orange-500 to-purple-400" }
+    { src: "/screen3.png", color: "from-purple-500 to-purple-400" },
+    { src: "/screen4.png", color: "from-pink-500 to-pink-400" }
   ].map((item, i) => (
     <motion.div 
       key={i}
