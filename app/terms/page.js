@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Terms() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-cyan-500/30 relative overflow-hidden px-6 py-24">
+    <main className="min-h-screen bg-black text-white selection:bg-cyan-500/30 relative overflow-hidden px-6 py-8">
       
       {/* BACKGROUND GLOWS */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
