@@ -10,6 +10,23 @@ export default function Home() {
   // State για να δείξουμε ένα μήνυμα επιτυχίας στη φόρμα
   const [formStatus, setFormStatus] = useState("");
 
+// Συνάρτηση για ομαλό scroll στα sections (Διορθωμένη για mobile)
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault(); 
+    
+    // 1. Κλείνουμε το burger menu
+    setIsMobileMenuOpen(false); 
+
+    // 2. Δίνουμε 150ms χρόνο στο React να κλείσει το μενού ΠΡΙΝ ξεκινήσει το scroll
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 150);
+  };
+
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -64,11 +81,11 @@ export default function Home() {
             OnBars
           </div>
           
-          {/* Desktop Menu */}
+         {/* Desktop Menu */}
           <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
-            <a href="#features" className="hover:text-white transition-colors">How it works</a>
-            <a href="#preview" className="hover:text-white transition-colors">App</a>
-            <a href="#beta" className="hover:text-white transition-colors">Beta</a>
+            <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">How it works</a>
+            <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white transition-colors cursor-pointer">App</a>
+            <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white transition-colors cursor-pointer">Beta</a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -96,9 +113,9 @@ export default function Home() {
               className="md:hidden border-t border-zinc-800/50 bg-black/95 backdrop-blur-xl overflow-hidden"
             >
               <div className="flex flex-col px-6 py-4 gap-4 text-sm font-medium text-gray-400">
-                <a href="#features" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-2">How it works</a>
-                <a href="#preview" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-2">App</a>
-                <a href="#beta" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-white py-2">Beta</a>
+                <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white py-2 cursor-pointer">How it works</a>
+                <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white py-2 cursor-pointer">App</a>
+                <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white py-2 cursor-pointer">Beta</a>
               </div>
             </motion.div>
           )}
