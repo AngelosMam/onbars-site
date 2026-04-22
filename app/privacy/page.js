@@ -73,6 +73,45 @@ export default function Privacy() {
               </p>
             </section>
 
+<section>
+  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+    Legal Basis for Processing
+  </h2>
+  <p>
+    We process your personal data based on your consent, the necessity to provide our services,
+    and our legitimate interest in improving the platform.
+  </p>
+</section>
+
+<section>
+  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+    Data Storage & Third Parties
+  </h2>
+  <p>
+    Your data is securely stored using third-party services such as Supabase.
+    These providers process data on our behalf and comply with applicable data protection laws.
+  </p>
+</section>
+
+<section>
+  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+    Your Rights
+  </h2>
+  <p>
+    You have the right to access, correct, or delete your personal data.
+    You may also request data portability or withdraw your consent at any time.
+  </p>
+</section>
+
+<section>
+  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+    Location Data
+  </h2>
+  <p>
+    OnBars may access your location to show nearby outdoor gyms.
+    Location data is only used to provide this feature and is not shared publicly without your consent.
+  </p>
+</section>
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
                 Contact

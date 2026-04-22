@@ -73,6 +73,36 @@ export default function Terms() {
             </section>
 
             <section>
+  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+    Health Disclaimer
+  </h2>
+  <p>
+    The content and workouts provided through OnBars are for informational purposes only.
+    You are responsible for your physical condition and should consult a professional before engaging in exercise.
+  </p>
+</section>
+
+<section>
+  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+    User Content
+  </h2>
+  <p>
+    Users may upload content such as workouts, images, and posts.
+    You retain ownership of your content, but grant OnBars a license to display and use it within the platform.
+  </p>
+</section>
+
+<section>
+  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+    Account Responsibility
+  </h2>
+  <p>
+    You are responsible for maintaining the security of your account
+    and for all activities that occur under your account.
+  </p>
+</section>
+
+            <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
                 Changes to Terms
               </h2>
