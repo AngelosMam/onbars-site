@@ -10,9 +10,9 @@ export default function Home() {
   // State για να δείξουμε ένα μήνυμα επιτυχίας στη φόρμα
   const [formStatus, setFormStatus] = useState("");
 
-// Συνάρτηση για ομαλό scroll στα sections (Διορθωμένη για mobile)
+  // Συνάρτηση για ομαλό scroll στα sections (Διορθωμένη για mobile)
   const scrollToSection = (e, sectionId) => {
-    e.preventDefault(); 
+    if (e) e.preventDefault(); 
     
     // 1. Κλείνουμε το burger menu
     setIsMobileMenuOpen(false); 
@@ -26,7 +26,6 @@ export default function Home() {
     }, 150);
   };
 
-
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -34,7 +33,6 @@ export default function Home() {
     transition: { duration: 0.6 }
   };
 
-  // Βελτιωμένη υποβολή φόρμας - (Αφαιρέθηκε το TypeScript)
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setFormStatus("submitting");
@@ -52,11 +50,9 @@ export default function Home() {
         },
       });
 
+      // Αλλάζουμε το status σε success για να εμφανιστούν τα κουμπιά
       setFormStatus("success");
       form.reset();
-      
-      // Ξεκινάει το κατέβασμα της εφαρμογής
-      window.location.href = "/onbars-beta.apk";
       
     } catch (error) {
       console.error("Σφάλμα κατά την υποβολή:", error);
@@ -167,6 +163,7 @@ export default function Home() {
           and compete with other athletes by spreading your <span className="text-white font-semibold italic">Aura</span> across the map.
         </motion.p>
 
+        {/* HERO BUTTONS THAT SCROLL TO BETA FORM */}
         <motion.div 
           className="flex flex-col sm:flex-row gap-4"
           {...fadeIn}
@@ -174,12 +171,17 @@ export default function Home() {
         >
           <a
             href="#beta"
+            onClick={(e) => scrollToSection(e, 'beta')}
             className="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-green-400 hover:shadow-[0_0_25px_rgba(34,211,0,0.6)] transition-all transform hover:scale-105 active:scale-95"
           >
-            Download Android
+            Get Android Beta
           </a>
-          <a href="#beta" className="bg-zinc-900 border border-zinc-700 text-white px-8 py-4 rounded-2xl font-bold hover:border-cyan-500 hover:shadow-[0_0_25px_rgba(34,211,234,0.6)] transition-all transform hover:scale-105 active:scale-95">
-            Download iOS
+          <a 
+            href="#beta"
+            onClick={(e) => scrollToSection(e, 'beta')}
+            className="bg-zinc-900 border border-zinc-700 text-white px-8 py-4 rounded-2xl font-bold hover:border-cyan-500 hover:shadow-[0_0_25px_rgba(34,211,234,0.6)] transition-all transform hover:scale-105 active:scale-95"
+          >
+            Get iOS Beta
           </a>
         </motion.div>
       </section>
@@ -250,11 +252,6 @@ export default function Home() {
           App Preview
         </motion.h2>
 
-        {/* Αλλαγές εδώ:
-          1. overflow-x-auto για οριζόντιο scroll
-          2. snap-x snap-mandatory για να "κουμπώνει" η εικόνα στο κέντρο
-          3. κρύβουμε την μπάρα κύλισης με tailwind arbitrary variants
-        */}
         <div className="flex overflow-x-auto pb-12 pt-4 snap-x snap-mandatory gap-6 md:gap-12 md:flex-wrap md:justify-center max-w-7xl mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {[
             { src: "/screen1.png", color: "from-blue-500 to-cyan-400" },
@@ -271,7 +268,6 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -15 }}
-              /* Προσθήκη shrink-0 για να μην συμπιέζονται και snap-center για το κούμπωμα */
               className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0"
             >
               <div className={`absolute -inset-1 bg-gradient-to-b ${item.color} rounded-[2.5rem] blur opacity-0 group-hover:opacity-40 transition duration-500`}></div>
@@ -298,43 +294,72 @@ export default function Home() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-blue-500/20 blur-[80px] -z-10"></div>
           
           <h2 className="text-4xl font-bold mb-4 tracking-tight">Join the Beta</h2>
-          <p className="text-gray-400 mb-10 text-lg">
-            Limited spots available for early athletes.
-          </p>
-
-          <form
-            action="https://formspree.io/f/mqeyebjq"
-            method="POST"
-            onSubmit={handleFormSubmit}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder="Enter your email"
-              className="flex-1 px-6 py-4 rounded-2xl bg-zinc-800/50 border border-zinc-700 text-white outline-none focus:border-cyan-500 transition-all"
-            />
-
-            <button
-              type="submit"
-              disabled={formStatus === "submitting"}
-              className="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-cyan-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          
+          {formStatus === "success" ? (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              className="flex flex-col items-center mt-6"
             >
-              {formStatus === "submitting" ? "Joining..." : "Join & Download"}
-            </button>
-          </form>
+              <h3 className="text-2xl font-bold text-cyan-400 mb-2">Welcome to OnBars!</h3>
+              <p className="text-gray-300 mb-8">
+                Thanks for joining the waitlist. Choose your platform below to start spreading your Aura.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.people.on.bars"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-green-400 hover:shadow-[0_0_25px_rgba(34,211,0,0.6)] transition-all transform hover:scale-105 active:scale-95"
+                >
+                  Download Android
+                </a>
+                <a 
+                  href="https://testflight.apple.com/join/f4DafGEU"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-zinc-900 border border-zinc-700 text-white px-8 py-4 rounded-2xl font-bold hover:border-cyan-500 hover:shadow-[0_0_25px_rgba(34,211,234,0.6)] transition-all transform hover:scale-105 active:scale-95"
+                >
+                  Download iOS
+                </a>
+              </div>
+            </motion.div>
+          ) : (
+            <>
+              <p className="text-gray-400 mb-10 text-lg">
+                Limited spots available for early athletes. Drop your email to unlock the download links.
+              </p>
 
-          {/* Μηνύματα επιτυχίας/αποτυχίας */}
-          {formStatus === "success" && (
-            <p className="text-blue-400 mt-4 font-medium animate-pulse">
-              Welcome to OnBars! Thanks for joining the beta...
-            </p>
-          )}
-          {formStatus === "error" && (
-            <p className="text-red-400 mt-4 font-medium">
-              Oops! Something went wrong. Please try again.
-            </p>
+              <form
+                action="https://formspree.io/f/mqeyebjq"
+                method="POST"
+                onSubmit={handleFormSubmit}
+                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+              >
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Enter your email"
+                  className="flex-1 px-6 py-4 rounded-2xl bg-zinc-800/50 border border-zinc-700 text-white outline-none focus:border-cyan-500 transition-all"
+                />
+
+                <button
+                  type="submit"
+                  disabled={formStatus === "submitting"}
+                  className="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-cyan-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {formStatus === "submitting" ? "Joining..." : "Join & Download"}
+                </button>
+              </form>
+
+              {formStatus === "error" && (
+                <p className="text-red-400 mt-4 font-medium">
+                  Oops! Something went wrong. Please try again.
+                </p>
+              )}
+            </>
           )}
 
         </motion.div>
