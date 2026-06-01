@@ -77,7 +77,7 @@ export default function Home() {
             OnBars
           </div>
           
-         {/* Desktop Menu */}
+          {/* Desktop Menu */}
           <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
             <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">How it works</a>
             <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white transition-colors cursor-pointer">App</a>
@@ -163,7 +163,7 @@ export default function Home() {
           and compete with other athletes by spreading your <span className="text-white font-semibold italic">Aura</span> across the map.
         </motion.p>
 
-        {/* HERO BUTTONS THAT SCROLL TO BETA FORM */}
+        {/* HERO BUTTONS */}
         <motion.div 
           className="flex flex-col sm:flex-row gap-4"
           {...fadeIn}
@@ -246,7 +246,7 @@ export default function Home() {
         </div>
       </section>
 
-     {/* SCREENSHOTS / PREVIEW */}
+      {/* SCREENSHOTS / PREVIEW */}
       <section id="preview" className="px-6 py-24 bg-zinc-900/20">
         <motion.h2 className="text-4xl font-bold text-center mb-16" {...fadeIn}>
           App Preview
@@ -284,84 +284,140 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BETA SIGNUP */}
-      <section id="beta" className="max-w-4xl mx-auto px-6 py-32 text-center">
+      {/* BETA SIGNUP SECTION */}
+      <section id="beta" className="max-w-5xl mx-auto px-6 py-32 text-center">
         <motion.div 
-          className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 p-12 rounded-[3rem] relative overflow-hidden"
+          className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 p-8 md:p-12 rounded-[3rem] relative overflow-hidden"
           {...fadeIn}
         >
-          {/* Subtle Glow */}
+          {/* Subtle Background Glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-blue-500/20 blur-[80px] -z-10"></div>
           
           <h2 className="text-4xl font-bold mb-4 tracking-tight">Join the Beta</h2>
-          
-          {formStatus === "success" ? (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              className="flex flex-col items-center mt-6"
-            >
-              <h3 className="text-2xl font-bold text-cyan-400 mb-2">Welcome to OnBars!</h3>
-              <p className="text-gray-300 mb-8">
-                Thanks for joining the waitlist. Choose your platform below to start spreading your Aura.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
+          <p className="text-gray-400 max-w-xl mx-auto mb-12 text-sm md:text-base">
+            Select your platform below to get instant access, install the app, and start spreading your Aura.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left items-stretch">
+            
+            {/* ANDROID BLOCK (GOOGLE GROUPS) */}
+            <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">
+                    Android
+                  </span>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-3">Google Play Beta</h3>
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                  Due to Google Play's closed testing rules, follow these two simple steps to automatically whitelist your email for direct access.
+                </p>
+
+                {/* Android Steps */}
+                <div className="space-y-4 mb-8">
+                  <div className="flex gap-4 items-start">
+                    <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0 text-xs font-bold text-gray-300 mt-0.5">1</div>
+                    <p className="text-gray-300 text-sm">
+                      Join our Google Group using your Android phone's primary Google account.
+                    </p>
+                  </div>
+                  <div className="flex gap-4 items-start">
+                    <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0 text-xs font-bold text-gray-300 mt-0.5">2</div>
+                    <p className="text-gray-300 text-sm">
+                      Click the "Become a Tester" web invite link below to unlock the direct Play Store download.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons for Android */}
+              <div className="flex flex-col gap-3 mt-auto">
                 <a
-                  href="https://play.google.com/store/apps/details?id=com.people.on.bars"
+                  href="https://groups.google.com/g/onbars-testers"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-green-400 hover:shadow-[0_0_25px_rgba(34,211,0,0.6)] transition-all transform hover:scale-105 active:scale-95"
+                  className="w-full text-center bg-zinc-900 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:border-cyan-500 hover:text-cyan-400 transition-all text-sm"
                 >
-                  Download Android
+                  1. Join Google Group
                 </a>
-                <a 
-                  href="https://testflight.apple.com/join/f4DafGEU"
+                <a
+                  href="https://play.google.com/apps/testing/com.onbars.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-zinc-900 border border-zinc-700 text-white px-8 py-4 rounded-2xl font-bold hover:border-cyan-500 hover:shadow-[0_0_25px_rgba(34,211,234,0.6)] transition-all transform hover:scale-105 active:scale-95"
+                  className="w-full text-center bg-white text-black px-6 py-3.5 rounded-xl font-bold hover:bg-green-400 hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95"
                 >
-                  Download iOS
+                  2. Become a Tester & Download
                 </a>
               </div>
-            </motion.div>
-          ) : (
-            <>
-              <p className="text-gray-400 mb-10 text-lg">
-                Limited spots available for early athletes. Drop your email to unlock the download links.
-              </p>
+            </div>
 
-              <form
-                action="https://formspree.io/f/mqeyebjq"
-                method="POST"
-                onSubmit={handleFormSubmit}
-                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-              >
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="Enter your email"
-                  className="flex-1 px-6 py-4 rounded-2xl bg-zinc-800/50 border border-zinc-700 text-white outline-none focus:border-cyan-500 transition-all"
-                />
-
-                <button
-                  type="submit"
-                  disabled={formStatus === "submitting"}
-                  className="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-cyan-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {formStatus === "submitting" ? "Joining..." : "Join & Download"}
-                </button>
-              </form>
-
-              {formStatus === "error" && (
-                <p className="text-red-400 mt-4 font-medium">
-                  Oops! Something went wrong. Please try again.
+            {/* IOS BLOCK (FORMSPREE FUNNEL) */}
+            <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider">
+                    iOS
+                  </span>
+                  <span className="text-xs text-gray-500 font-medium">10,000 spots open</span>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-3">Apple TestFlight</h3>
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                  Enter your email below to unlock immediate access to our global TestFlight track and receive early feature notifications.
                 </p>
-              )}
-            </>
-          )}
+              </div>
 
+              {/* Form Status Content */}
+              <div className="mt-auto">
+                {formStatus === "success" ? (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }} 
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="space-y-4"
+                  >
+                    <div className="p-4 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl text-center">
+                      <p className="text-cyan-400 text-sm font-semibold">Welcome to OnBars! ⚡</p>
+                    </div>
+                    <a 
+                      href="https://testflight.apple.com/join/f4DafGEU"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-4 rounded-xl font-bold hover:shadow-[0_0_25px_rgba(34,211,234,0.4)] transition-all text-sm transform active:scale-95"
+                    >
+                      Download via TestFlight
+                    </a>
+                  </motion.div>
+                ) : (
+                  <form
+                    action="https://formspree.io/f/mqeyebjq"
+                    method="POST"
+                    onSubmit={handleFormSubmit}
+                    className="flex flex-col gap-3"
+                  >
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="Enter your Apple ID email"
+                      className="w-full px-5 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 text-white outline-none focus:border-cyan-500 transition-all text-sm"
+                    />
+                    <button
+                      type="submit"
+                      disabled={formStatus === "submitting"}
+                      className="w-full bg-zinc-800 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all disabled:opacity-50 text-sm"
+                    >
+                      {formStatus === "submitting" ? "Processing..." : "Unlock iOS Access"}
+                    </button>
+                    {formStatus === "error" && (
+                      <p className="text-red-400 text-xs mt-1 text-center font-medium">
+                        Oops! Something went wrong. Please try again.
+                      </p>
+                    )}
+                  </form>
+                )}
+              </div>
+            </div>
+
+          </div>
         </motion.div>
       </section>
 
