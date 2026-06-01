@@ -341,7 +341,7 @@ export default function Home() {
                   1. Join Google Group
                 </a>
                 <a
-                  href="https://play.google.com/apps/testing/com.onbars.app"
+                  href="https://play.google.com/apps/testing/com.people.on.bars"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full text-center bg-white text-black px-6 py-3.5 rounded-xl font-bold hover:bg-green-400 hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95"
