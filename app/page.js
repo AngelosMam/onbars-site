@@ -1,23 +1,97 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
-  // State για το Mobile Menu
+  // State για το Mobile Menu & Forms
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // State για να δείξουμε ένα μήνυμα επιτυχίας στη φόρμα
   const [formStatus, setFormStatus] = useState("");
+
+  // States & Refs για το Audio
+  const audioRef = useRef(null);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  // Αρχικοποίηση του Audio (τρέχει μόνο στον client)
+  useEffect(() => {
+    audioRef.current = new Audio("/soundtrack.mp3");
+    audioRef.current.loop = true; // Να παίζει σε λούπα
+    audioRef.current.volume = 0;  // Ξεκινάει από το 0 για να γίνει το fade in
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+
+  // Συνάρτηση για ομαλό Fade In
+  const playAudioWithFadeIn = () => {
+    if (!audioRef.current) return;
+    
+    audioRef.current.play().then(() => {
+      setIsAudioPlaying(true);
+      
+      let volume = 0;
+      const targetVolume = 0.4; // Η μέγιστη ένταση (0.0 έως 1.0). Βάλτο στο 0.4 για να είναι ωραίο background χωρίς να ενοχλεί.
+      
+      const fadeInterval = setInterval(() => {
+        if (volume < targetVolume) {
+          volume += 0.05;
+          audioRef.current.volume = Math.min(volume, targetVolume);
+        } else {
+          clearInterval(fadeInterval);
+        }
+      }, 250); // Κάθε 250ms αυξάνεται η ένταση (ομαλό fade in ~2 δευτερολέπτων)
+    }).catch((error) => {
+      console.log("Το Autoplay μπλοκαρίστηκε από τον browser:", error);
+    });
+  };
+
+  // Toggle Play/Pause από το κουμπί
+  const toggleAudio = () => {
+    if (!audioRef.current) return;
+
+    if (isAudioPlaying) {
+      audioRef.current.pause();
+      setIsAudioPlaying(false);
+    } else {
+      // Αν πατήσει play χειροκίνητα, βάζουμε κατευθείαν την ένταση στο 0.4
+      audioRef.current.volume = 0.4;
+      audioRef.current.play();
+      setIsAudioPlaying(true);
+    }
+  };
+
+  // Περιμένουμε το πρώτο κλικ ή scroll του χρήστη για να ξεκινήσει η μουσική
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (!hasInteracted) {
+        setHasInteracted(true);
+        playAudioWithFadeIn();
+      }
+    };
+
+    window.addEventListener("click", handleFirstInteraction);
+    window.addEventListener("scroll", handleFirstInteraction);
+    // Για κινητά
+    window.addEventListener("touchstart", handleFirstInteraction);
+
+    return () => {
+      window.removeEventListener("click", handleFirstInteraction);
+      window.removeEventListener("scroll", handleFirstInteraction);
+      window.removeEventListener("touchstart", handleFirstInteraction);
+    };
+  }, [hasInteracted]);
 
   // Συνάρτηση για ομαλό scroll στα sections (Διορθωμένη για mobile)
   const scrollToSection = (e, sectionId) => {
     if (e) e.preventDefault(); 
     
-    // 1. Κλείνουμε το burger menu
     setIsMobileMenuOpen(false); 
 
-    // 2. Δίνουμε 150ms χρόνο στο React να κλείσει το μενού ΠΡΙΝ ξεκινήσει το scroll
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -41,7 +115,6 @@ export default function Home() {
     const formData = new FormData(form);
 
     try {
-      // Στέλνει τα δεδομένα στο Formspree χωρίς να αλλάξει σελίδα
       await fetch(form.action, {
         method: form.method,
         body: formData,
@@ -50,7 +123,6 @@ export default function Home() {
         },
       });
 
-      // Αλλάζουμε το status σε success για να εμφανιστούν τα κουμπιά
       setFormStatus("success");
       form.reset();
       
@@ -77,26 +149,49 @@ export default function Home() {
             OnBars
           </div>
           
-          {/* Desktop Menu */}
-          <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
-            <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">How it works</a>
-            <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white transition-colors cursor-pointer">App</a>
-            <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white transition-colors cursor-pointer">Beta</a>
-          </div>
+          <div className="flex items-center gap-6">
+            {/* Desktop Menu */}
+            <div className="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+              <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">How it works</a>
+              <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white transition-colors cursor-pointer">App</a>
+              <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white transition-colors cursor-pointer">Beta</a>
+            </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-gray-400 hover:text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            {/* AUDIO TOGGLE BUTTON */}
+            <button 
+              onClick={toggleAudio}
+              className="text-cyan-400 hover:text-white transition-colors p-2 rounded-full hover:bg-zinc-800/50"
+              title={isAudioPlaying ? "Mute soundtrack" : "Play soundtrack"}
+            >
+              {isAudioPlaying ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                </svg>
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <line x1="23" y1="9" x2="17" y2="15"></line>
+                  <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
               )}
-            </svg>
-          </button>
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-gray-400 hover:text-white p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {isMobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
@@ -300,53 +395,30 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left items-stretch">
             
-            {/* ANDROID BLOCK (GOOGLE GROUPS) */}
+            {/* ANDROID BLOCK (OPEN BETA) */}
             <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <span className="px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">
                     Android
                   </span>
+                  <span className="text-xs text-gray-500 font-medium">Open Beta</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">Google Play Beta</h3>
+                <h3 className="text-2xl font-bold text-white mb-3">Google Play Store</h3>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  Due to Google Play's closed testing rules, follow these two simple steps to automatically whitelist your email for direct access.
+                  The Android Open Beta is now live! You can download OnBars directly from the Google Play Store and start playing immediately.
                 </p>
-
-                {/* Android Steps */}
-                <div className="space-y-4 mb-8">
-                  <div className="flex gap-4 items-start">
-                    <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0 text-xs font-bold text-gray-300 mt-0.5">1</div>
-                    <p className="text-gray-300 text-sm">
-                      Join our Google Group using your Android phone's primary Google account.
-                    </p>
-                  </div>
-                  <div className="flex gap-4 items-start">
-                    <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0 text-xs font-bold text-gray-300 mt-0.5">2</div>
-                    <p className="text-gray-300 text-sm">
-                      Click the "Become a Tester" web invite link below to unlock the direct Play Store download.
-                    </p>
-                  </div>
-                </div>
               </div>
 
-              {/* Action Buttons for Android */}
-              <div className="flex flex-col gap-3 mt-auto">
+              {/* Action Button for Android */}
+              <div className="flex flex-col gap-3 mt-auto pt-8">
                 <a
-                  href="https://groups.google.com/g/onbars-testers"
+                  href="https://play.google.com/store/apps/details?id=com.people.on.bars"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full text-center bg-zinc-900 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:border-cyan-500 hover:text-cyan-400 transition-all text-sm"
+                  className="w-full text-center bg-white text-black px-6 py-4 rounded-xl font-bold hover:bg-green-400 hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95"
                 >
-                  1. Join Google Group
-                </a>
-                <a
-                  href="https://play.google.com/apps/testing/com.people.on.bars"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full text-center bg-white text-black px-6 py-3.5 rounded-xl font-bold hover:bg-green-400 hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95"
-                >
-                  2. Become a Tester & Download
+                  Download on Google Play
                 </a>
               </div>
             </div>
@@ -358,7 +430,7 @@ export default function Home() {
                   <span className="px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider">
                     iOS
                   </span>
-                  <span className="text-xs text-gray-500 font-medium">10,000 spots open</span>
+                  <span className="text-xs text-gray-500 font-medium">Limited spots</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">Apple TestFlight</h3>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">
