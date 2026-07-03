@@ -5,9 +5,12 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
-  // State για το Mobile Menu & Forms
+  // State για το Mobile Menu
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState("");
+  
+  // Ξεχωριστά States για να δείξουμε τα μηνύματα επιτυχίας στην κάθε φόρμα
+  const [androidFormStatus, setAndroidFormStatus] = useState("");
+  const [iosFormStatus, setIosFormStatus] = useState("");
 
   // States & Refs για το Audio
   const audioRef = useRef(null);
@@ -17,8 +20,8 @@ export default function Home() {
   // Αρχικοποίηση του Audio (τρέχει μόνο στον client)
   useEffect(() => {
     audioRef.current = new Audio("/soundtrack.mp3");
-    audioRef.current.loop = true; // Να παίζει σε λούπα
-    audioRef.current.volume = 0;  // Ξεκινάει από το 0 για να γίνει το fade in
+    audioRef.current.loop = true; 
+    audioRef.current.volume = 0;  
 
     return () => {
       if (audioRef.current) {
@@ -27,7 +30,6 @@ export default function Home() {
     };
   }, []);
 
-  // Συνάρτηση για ομαλό Fade In
   const playAudioWithFadeIn = () => {
     if (!audioRef.current) return;
     
@@ -35,7 +37,7 @@ export default function Home() {
       setIsAudioPlaying(true);
       
       let volume = 0;
-      const targetVolume = 0.4; // Η μέγιστη ένταση (0.0 έως 1.0). Βάλτο στο 0.4 για να είναι ωραίο background χωρίς να ενοχλεί.
+      const targetVolume = 0.4; 
       
       const fadeInterval = setInterval(() => {
         if (volume < targetVolume) {
@@ -44,13 +46,12 @@ export default function Home() {
         } else {
           clearInterval(fadeInterval);
         }
-      }, 250); // Κάθε 250ms αυξάνεται η ένταση (ομαλό fade in ~2 δευτερολέπτων)
+      }, 250); 
     }).catch((error) => {
       console.log("Το Autoplay μπλοκαρίστηκε από τον browser:", error);
     });
   };
 
-  // Toggle Play/Pause από το κουμπί
   const toggleAudio = () => {
     if (!audioRef.current) return;
 
@@ -58,14 +59,12 @@ export default function Home() {
       audioRef.current.pause();
       setIsAudioPlaying(false);
     } else {
-      // Αν πατήσει play χειροκίνητα, βάζουμε κατευθείαν την ένταση στο 0.4
       audioRef.current.volume = 0.4;
       audioRef.current.play();
       setIsAudioPlaying(true);
     }
   };
 
-  // Περιμένουμε το πρώτο κλικ ή scroll του χρήστη για να ξεκινήσει η μουσική
   useEffect(() => {
     const handleFirstInteraction = () => {
       if (!hasInteracted) {
@@ -76,7 +75,6 @@ export default function Home() {
 
     window.addEventListener("click", handleFirstInteraction);
     window.addEventListener("scroll", handleFirstInteraction);
-    // Για κινητά
     window.addEventListener("touchstart", handleFirstInteraction);
 
     return () => {
@@ -86,7 +84,6 @@ export default function Home() {
     };
   }, [hasInteracted]);
 
-  // Συνάρτηση για ομαλό scroll στα sections (Διορθωμένη για mobile)
   const scrollToSection = (e, sectionId) => {
     if (e) e.preventDefault(); 
     
@@ -107,9 +104,13 @@ export default function Home() {
     transition: { duration: 0.6 }
   };
 
-  const handleFormSubmit = async (e) => {
+  // Ανανεωμένη συνάρτηση που δέχεται και την πλατφόρμα
+  const handleFormSubmit = async (e, platform) => {
     e.preventDefault();
-    setFormStatus("submitting");
+    
+    // Επιλέγουμε ποιο status θα ενημερώσουμε
+    const setStatus = platform === 'android' ? setAndroidFormStatus : setIosFormStatus;
+    setStatus("submitting");
 
     const form = e.target;
     const formData = new FormData(form);
@@ -123,12 +124,12 @@ export default function Home() {
         },
       });
 
-      setFormStatus("success");
+      setStatus("success");
       form.reset();
       
     } catch (error) {
       console.error("Σφάλμα κατά την υποβολή:", error);
-      setFormStatus("error");
+      setStatus("error");
     }
   };
 
@@ -395,35 +396,76 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left items-stretch">
             
-            {/* ANDROID BLOCK (OPEN BETA) */}
+            {/* ANDROID BLOCK */}
             <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <span className="px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">
                     Android
                   </span>
-                  <span className="text-xs text-gray-500 font-medium">Open Beta</span>
+                  <span className="text-xs text-gray-500 font-medium">Limited spots</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">Google Play Store</h3>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  The Android Open Beta is now live! You can download OnBars directly from the Google Play Store and start playing immediately.
+                  Enter your Google Play email below to unlock the direct download link and join the Open Beta.
                 </p>
               </div>
 
-              {/* Action Button for Android */}
-              <div className="flex flex-col gap-3 mt-auto pt-8">
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.people.on.bars"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full text-center bg-white text-black px-6 py-4 rounded-xl font-bold hover:bg-green-400 hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95"
-                >
-                  Download on Google Play
-                </a>
+              {/* Form Status Content for Android */}
+              <div className="mt-auto">
+                {androidFormStatus === "success" ? (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }} 
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="space-y-4"
+                  >
+                    <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-2xl text-center">
+                      <p className="text-green-400 text-sm font-semibold">Welcome to OnBars! ⚡</p>
+                    </div>
+                    <a 
+                      href="https://play.google.com/store/apps/details?id=com.people.on.bars"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center bg-white text-black px-6 py-4 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95"
+                    >
+                      Download on Google Play
+                    </a>
+                  </motion.div>
+                ) : (
+                  <form
+                    action="https://formspree.io/f/mqeyebjq"
+                    method="POST"
+                    onSubmit={(e) => handleFormSubmit(e, 'android')}
+                    className="flex flex-col gap-3"
+                  >
+                    {/* HIDDEN FIELD GIA NA KSEREIS STO FORMSPREE OTI EINAI ANDROID */}
+                    <input type="hidden" name="platform" value="Android" />
+                    
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="Enter your Google Play email"
+                      className="w-full px-5 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 text-white outline-none focus:border-green-500 transition-all text-sm"
+                    />
+                    <button
+                      type="submit"
+                      disabled={androidFormStatus === "submitting"}
+                      className="w-full bg-zinc-800 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-green-500 hover:text-black hover:border-green-500 transition-all disabled:opacity-50 text-sm"
+                    >
+                      {androidFormStatus === "submitting" ? "Processing..." : "Unlock Android Access"}
+                    </button>
+                    {androidFormStatus === "error" && (
+                      <p className="text-red-400 text-xs mt-1 text-center font-medium">
+                        Oops! Something went wrong. Please try again.
+                      </p>
+                    )}
+                  </form>
+                )}
               </div>
             </div>
 
-            {/* IOS BLOCK (FORMSPREE FUNNEL) */}
+            {/* IOS BLOCK */}
             <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
               <div>
                 <div className="flex items-center gap-3 mb-4">
@@ -434,13 +476,13 @@ export default function Home() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">Apple TestFlight</h3>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  Enter your email below to unlock immediate access to our global TestFlight track and receive early feature notifications.
+                  Enter your Apple ID email below to unlock immediate access to our TestFlight track and receive early feature notifications.
                 </p>
               </div>
 
-              {/* Form Status Content */}
+              {/* Form Status Content for iOS */}
               <div className="mt-auto">
-                {formStatus === "success" ? (
+                {iosFormStatus === "success" ? (
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }} 
                     animate={{ opacity: 1, scale: 1 }}
@@ -462,9 +504,12 @@ export default function Home() {
                   <form
                     action="https://formspree.io/f/mqeyebjq"
                     method="POST"
-                    onSubmit={handleFormSubmit}
+                    onSubmit={(e) => handleFormSubmit(e, 'ios')}
                     className="flex flex-col gap-3"
                   >
+                    {/* HIDDEN FIELD GIA NA KSEREIS STO FORMSPREE OTI EINAI IOS */}
+                    <input type="hidden" name="platform" value="iOS" />
+                    
                     <input
                       type="email"
                       name="email"
@@ -474,12 +519,12 @@ export default function Home() {
                     />
                     <button
                       type="submit"
-                      disabled={formStatus === "submitting"}
+                      disabled={iosFormStatus === "submitting"}
                       className="w-full bg-zinc-800 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all disabled:opacity-50 text-sm"
                     >
-                      {formStatus === "submitting" ? "Processing..." : "Unlock iOS Access"}
+                      {iosFormStatus === "submitting" ? "Processing..." : "Unlock iOS Access"}
                     </button>
-                    {formStatus === "error" && (
+                    {iosFormStatus === "error" && (
                       <p className="text-red-400 text-xs mt-1 text-center font-medium">
                         Oops! Something went wrong. Please try again.
                       </p>
