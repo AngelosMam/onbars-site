@@ -104,25 +104,28 @@ export default function Home() {
     transition: { duration: 0.6 }
   };
 
-  // Ανανεωμένη συνάρτηση που δέχεται και την πλατφόρμα
+  // Direct υποβολή στο δικό μας Next.js API route συνδεδεμένο με Supabase
   const handleFormSubmit = async (e, platform) => {
     e.preventDefault();
     
-    // Επιλέγουμε ποιο status θα ενημερώσουμε
-    const setStatus = platform === 'android' ? setAndroidFormStatus : setIosFormStatus;
+    const setStatus = platform === 'Android' ? setAndroidFormStatus : setIosFormStatus;
     setStatus("submitting");
 
     const form = e.target;
-    const formData = new FormData(form);
+    const email = form.email.value;
 
     try {
-      await fetch(form.action, {
-        method: form.method,
-        body: formData,
+      const response = await fetch("/api/beta-signup", {
+        method: "POST",
         headers: {
-          Accept: "application/json",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({ email, platform }),
       });
+
+      if (!response.ok) {
+        throw new Error("Αποτυχία εγγραφής");
+      }
 
       setStatus("success");
       form.reset();
@@ -151,27 +154,27 @@ export default function Home() {
           </div>
           
           <div className="flex items-center gap-6">
-           {/* Desktop Menu */}
-<div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-  <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">How it works</a>
-  <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white transition-colors cursor-pointer">App</a>
-  <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white transition-colors cursor-pointer">Beta</a>
-  
-  {/* Instagram Link Nav */}
-  <a 
-    href="https://instagram.com/onbarsapp" 
-    target="_blank" 
-    rel="noopener noreferrer" 
-    className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer border-l border-zinc-800 pl-8 ml-2"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-    </svg>
-    Instagram
-  </a>
-</div>
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+              <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">How it works</a>
+              <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white transition-colors cursor-pointer">App</a>
+              <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white transition-colors cursor-pointer">Beta</a>
+              
+              {/* Instagram Link Nav */}
+              <a 
+                href="https://instagram.com/onbarsapp" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-2 hover:text-white transition-colors cursor-pointer border-l border-zinc-800 pl-8 ml-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                Instagram
+              </a>
+            </div>
 
             {/* AUDIO TOGGLE BUTTON */}
             <button 
@@ -210,38 +213,38 @@ export default function Home() {
           </div>
         </div>
 
-       {/* Mobile Menu Dropdown */}
-<AnimatePresence>
-  {isMobileMenuOpen && (
-    <motion.div
-      initial={{ height: 0, opacity: 0 }}
-      animate={{ height: "auto", opacity: 1 }}
-      exit={{ height: 0, opacity: 0 }}
-      className="md:hidden border-t border-zinc-800/50 bg-black/95 backdrop-blur-xl overflow-hidden"
-    >
-      <div className="flex flex-col px-6 py-4 gap-4 text-sm font-medium text-gray-400">
-        <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white py-2 cursor-pointer">How it works</a>
-        <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white py-2 cursor-pointer">App</a>
-        <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white py-2 cursor-pointer">Beta</a>
-        
-        {/* Instagram Link Mobile */}
-        <a 
-          href="https://instagram.com/onbarsapp" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="flex items-center gap-2 hover:text-white py-2 cursor-pointer border-t border-zinc-800/50 mt-2 pt-4"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-          Instagram
-        </a>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="md:hidden border-t border-zinc-800/50 bg-black/95 backdrop-blur-xl overflow-hidden"
+            >
+              <div className="flex flex-col px-6 py-4 gap-4 text-sm font-medium text-gray-400">
+                <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white py-2 cursor-pointer">How it works</a>
+                <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white py-2 cursor-pointer">App</a>
+                <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white py-2 cursor-pointer">Beta</a>
+                
+                {/* Instagram Link Mobile */}
+                <a 
+                  href="https://instagram.com/onbarsapp" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-2 hover:text-white py-2 cursor-pointer border-t border-zinc-800/50 mt-2 pt-4"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  Instagram
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* HERO SECTION */}
@@ -463,14 +466,9 @@ export default function Home() {
                   </motion.div>
                 ) : (
                   <form
-                    action="https://formspree.io/f/mqeyebjq"
-                    method="POST"
-                    onSubmit={(e) => handleFormSubmit(e, 'android')}
+                    onSubmit={(e) => handleFormSubmit(e, 'Android')}
                     className="flex flex-col gap-3"
                   >
-                    {/* HIDDEN FIELD GIA NA KSEREIS STO FORMSPREE OTI EINAI ANDROID */}
-                    <input type="hidden" name="platform" value="Android" />
-                    
                     <input
                       type="email"
                       name="email"
@@ -532,14 +530,9 @@ export default function Home() {
                   </motion.div>
                 ) : (
                   <form
-                    action="https://formspree.io/f/mqeyebjq"
-                    method="POST"
-                    onSubmit={(e) => handleFormSubmit(e, 'ios')}
+                    onSubmit={(e) => handleFormSubmit(e, 'iOS')}
                     className="flex flex-col gap-3"
                   >
-                    {/* HIDDEN FIELD GIA NA KSEREIS STO FORMSPREE OTI EINAI IOS */}
-                    <input type="hidden" name="platform" value="iOS" />
-                    
                     <input
                       type="email"
                       name="email"
@@ -586,23 +579,23 @@ export default function Home() {
              © {new Date().getFullYear()} OnBars. Spread your Aura.
           </div>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 text-sm text-gray-500">
-  <a 
-    href="https://instagram.com/onbarsapp" 
-    target="_blank" 
-    rel="noopener noreferrer" 
-    className="flex items-center gap-2 hover:text-white transition-colors"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-    </svg>
-    Instagram
-  </a>
-  <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
-  <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-  <a href="/contact" className="hover:text-white transition-colors">Contact</a>
-</div>
+            <a 
+              href="https://instagram.com/onbarsapp" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 hover:text-white transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              Instagram
+            </a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms</a>
+            <a href="/contact" className="hover:text-white transition-colors">Contact</a>
+          </div>
         </div>
       </footer>
 
