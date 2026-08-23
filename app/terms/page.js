@@ -37,79 +37,75 @@ export default function Terms() {
           <div className="space-y-10 text-gray-300 leading-relaxed text-lg">
             <section>
               <p>
-                By using the OnBars application and website you agree to the following terms.
+                By creating an account or using the OnBars application and website, you agree to the following terms.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Use of the App
+                Account & Age Requirements
               </h2>
               <p>
-                OnBars is designed to help users discover outdoor gyms,
-                track workouts, and interact with the calisthenics community.
-                Users are responsible for how they use the platform.
+                You must be <strong>at least 15 years old</strong> to use OnBars. You are responsible for providing accurate information and maintaining the security of your account credentials.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Beta Version
+                Acceptable Use
               </h2>
               <p>
-                The OnBars app may be provided as a beta version.
-                Features may change, and bugs may occur during testing.
+                OnBars is designed to help users discover outdoor gyms, track workouts, and interact with the calisthenics community. You must not:
+              </p>
+              <ul className="list-disc pl-5 mt-2 space-y-2">
+                <li>Provide false performance data or add fake parks.</li>
+                <li>Harass others or post hateful/illegal content.</li>
+                <li>Bypass security, automate access, or bulk-extract data (scraping).</li>
+              </ul>
+              <p className="mt-4">
+                Violating these rules may result in immediate suspension or termination of your account.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Limitation of Liability
+                Intellectual Property
               </h2>
               <p>
-                OnBars is not responsible for injuries or damages
-                resulting from workouts performed by users.
+                The "OnBars" trademark, logo, visual identity, app structure, and scoring formula are our property and are protected by intellectual property laws.
               </p>
             </section>
-
-            <section>
-  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-    Health Disclaimer
-  </h2>
-  <p>
-    The content and workouts provided through OnBars are for informational purposes only.
-    You are responsible for your physical condition and should consult a professional before engaging in exercise.
-  </p>
-</section>
-
-<section>
-  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-    User Content
-  </h2>
-  <p>
-    Users may upload content such as workouts, images, and posts.
-    You retain ownership of your content, but grant OnBars a license to display and use it within the platform.
-  </p>
-</section>
-
-<section>
-  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-    Account Responsibility
-  </h2>
-  <p>
-    You are responsible for maintaining the security of your account
-    and for all activities that occur under your account.
-  </p>
-</section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Changes to Terms
+                User Content
               </h2>
               <p>
-                We may update these terms in the future as the platform evolves.
+                Users may upload content such as workouts, images, and posts. You retain ownership of your content, but grant OnBars a limited, non-exclusive license to host and display it strictly to operate the platform.
               </p>
             </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+                Beta Version & Health Disclaimer
+              </h2>
+              <p>
+                <strong>Beta Version:</strong> The app may be provided as a beta version. Features may change, and bugs may occur during testing.
+              </p>
+              <p className="mt-4">
+                <strong>Health Disclaimer:</strong> The content provided through OnBars is for informational purposes only. OnBars provides no medical advice. You are responsible for your physical condition and train entirely at your own risk. Consult a health professional before engaging in rigorous exercise. OnBars is not responsible for injuries or damages resulting from workouts.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+                Governing Law & Changes
+              </h2>
+              <p>
+                These terms are governed by the laws of <strong>Greece</strong>. We may update these terms in the future as the platform evolves, and continued use constitutes acceptance of those changes.
+              </p>
+            </section>
+
           </div>
         </motion.div>
       </div>

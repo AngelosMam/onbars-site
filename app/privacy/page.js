@@ -38,7 +38,8 @@ export default function Privacy() {
             <section>
               <p>
                 OnBars respects your privacy and is committed to protecting your personal data.
-                This privacy policy explains how we collect, use, and protect your information when you use the OnBars app and website.
+                This privacy policy explains how we collect, use, and protect your information when you use the OnBars app and website. 
+                Currently, at pre-launch / beta phase, the data controller is the individual publisher of OnBars.
               </p>
             </section>
 
@@ -47,78 +48,53 @@ export default function Privacy() {
                 Information We Collect
               </h2>
               <p>
-                When using OnBars we may collect information such as your email address,
-                workout data, and location data used to display outdoor gyms near you.
+                When using OnBars, we collect:
+              </p>
+              <ul className="list-disc pl-5 mt-2 space-y-2">
+                <li><strong>Account Data:</strong> Email address, hashed passwords, or Google Identity.</li>
+                <li><strong>Profile & Performance Data:</strong> Username, date of birth (for age verification), bodyweight, gender, and workout performance (e.g., max pull-ups, dips).</li>
+                <li><strong>Content:</strong> Workouts, sessions, park check-ins, ratings, and posts.</li>
+                <li><strong>Location Data:</strong> Used strictly with your device OS permission to display outdoor gyms and parks near you.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+                How We Use Your Information & Legal Basis
+              </h2>
+              <p>
+                Your information is used to improve the OnBars platform, provide features such as workout tracking, scoring, leaderboards, and gym discovery. We process your personal data based on your <strong>consent</strong> (for location and optional profile data), the <strong>necessity to provide our services</strong> (contract), and our <strong>legitimate interest</strong> in securing and improving the platform.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                How We Use Your Information
+                Data Storage, Processors & Retention
               </h2>
               <p>
-                Your information is used to improve the OnBars platform,
-                provide features such as workout tracking and gym discovery,
-                and enhance the user experience.
+                Your data is securely stored using trusted third-party services such as <strong>Supabase</strong> (Database & Authentication) and map providers for location features. These providers process data on our behalf and comply with applicable data protection laws.
+              </p>
+              <p className="mt-4">
+                <strong>Data Retention:</strong> We keep your account data until you decide to delete your account. Upon account deletion, your personal data is permanently erased (cascading database delete and storage purge).
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Data Protection
+                Your Rights
               </h2>
               <p>
-                We take reasonable measures to protect your information
-                and prevent unauthorized access or disclosure.
+                You have the right to access, correct, or delete your personal data directly through the app settings. You may also request data portability or withdraw your consent (e.g., location tracking) at any time through your device settings.
               </p>
             </section>
 
-<section>
-  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-    Legal Basis for Processing
-  </h2>
-  <p>
-    We process your personal data based on your consent, the necessity to provide our services,
-    and our legitimate interest in improving the platform.
-  </p>
-</section>
-
-<section>
-  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-    Data Storage & Third Parties
-  </h2>
-  <p>
-    Your data is securely stored using third-party services such as Supabase.
-    These providers process data on our behalf and comply with applicable data protection laws.
-  </p>
-</section>
-
-<section>
-  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-    Your Rights
-  </h2>
-  <p>
-    You have the right to access, correct, or delete your personal data.
-    You may also request data portability or withdraw your consent at any time.
-  </p>
-</section>
-
-<section>
-  <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-    Location Data
-  </h2>
-  <p>
-    OnBars may access your location to show nearby outdoor gyms.
-    Location data is only used to provide this feature and is not shared publicly without your consent.
-  </p>
-</section>
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
                 Contact
               </h2>
               <p>
-                If you have questions regarding this privacy policy,
-                please contact us at: <a href="mailto:onbars.app@gmail.com" className="text-cyan-400 hover:underline">onbars.app@gmail.com</a>
+                If you have questions regarding this privacy policy or your data,
+                please contact us at: <a href="mailto:contact@onbarsapp.com" className="text-cyan-400 hover:underline">contact@onbarsapp.com</a>
               </p>
             </section>
           </div>
