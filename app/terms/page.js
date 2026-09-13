@@ -37,72 +37,78 @@ export default function Terms() {
           <div className="space-y-10 text-gray-300 leading-relaxed text-lg">
             <section>
               <p>
-                By creating an account or using the OnBars application and website, you agree to the following terms.
+                By creating an account or using the OnBars application and website, you agree to be bound by these Terms of Service. If you do not agree, do not use the application.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Account & Age Requirements
+                1. Account & Age Requirements
               </h2>
               <p>
-                You must be <strong>at least 15 years old</strong> to use OnBars. You are responsible for providing accurate information and maintaining the security of your account credentials.
+                You must be <strong>at least 15 years old</strong> to use OnBars. You are responsible for providing accurate information, maintaining the security of your account credentials, and for all activities that occur under your account.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Acceptable Use
+                2. User-Generated Content (UGC) & Moderation
               </h2>
               <p>
-                OnBars is designed to help users discover outdoor gyms, track workouts, and interact with the calisthenics community. You must not:
+                OnBars allows users to upload content, post in feeds, and interact with others. <strong>We have a zero-tolerance policy for objectionable content and abusive users.</strong> You must not:
               </p>
               <ul className="list-disc pl-5 mt-2 space-y-2">
-                <li>Provide false performance data or add fake parks.</li>
-                <li>Harass others or post hateful/illegal content.</li>
-                <li>Bypass security, automate access, or bulk-extract data (scraping).</li>
+                <li>Post defamatory, hateful, discriminatory, explicit, or illegal content.</li>
+                <li>Harass, bully, or threaten other users.</li>
+                <li>Provide false performance data or add fake/spam parks to the map.</li>
               </ul>
               <p className="mt-4">
-                Violating these rules may result in immediate suspension or termination of your account.
+                <strong>Reporting & Blocking:</strong> Users can flag inappropriate content and block abusive users directly within the app. OnBars reserves the right to review flagged content and suspend or permanently terminate accounts violating these terms, without prior notice.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Intellectual Property
+                3. Acceptable Use
               </h2>
               <p>
-                The "OnBars" trademark, logo, visual identity, app structure, and scoring formula are our property and are protected by intellectual property laws.
+                You agree not to bypass our security measures, reverse engineer the app, automate access, or bulk-extract data (scraping). You retain ownership of your content, but grant OnBars a limited, non-exclusive, worldwide license to host and display it to operate the platform.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                User Content
+                4. Intellectual Property
               </h2>
               <p>
-                Users may upload content such as workouts, images, and posts. You retain ownership of your content, but grant OnBars a limited, non-exclusive license to host and display it strictly to operate the platform.
+                The "OnBars" trademark, logo, visual identity, app structure, Aura scoring formula, and original assets are our exclusive property and are protected by intellectual property laws.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Beta Version & Health Disclaimer
+                5. Health Disclaimer
               </h2>
               <p>
-                <strong>Beta Version:</strong> The app may be provided as a beta version. Features may change, and bugs may occur during testing.
-              </p>
-              <p className="mt-4">
-                <strong>Health Disclaimer:</strong> The content provided through OnBars is for informational purposes only. OnBars provides no medical advice. You are responsible for your physical condition and train entirely at your own risk. Consult a health professional before engaging in rigorous exercise. OnBars is not responsible for injuries or damages resulting from workouts.
+                The content provided through OnBars is for informational and tracking purposes only. <strong>OnBars provides no medical advice.</strong> You are entirely responsible for your physical condition and train at your own risk. Consult a health professional before engaging in rigorous exercise. OnBars is not responsible for any injuries, health complications, or damages resulting from workouts logged or parks visited through the app.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
-                Governing Law & Changes
+                6. Limitation of Liability & "As Is" Service
               </h2>
               <p>
-                These terms are governed by the laws of <strong>Greece</strong>. We may update these terms in the future as the platform evolves, and continued use constitutes acceptance of those changes.
+                OnBars is provided on an "AS IS" and "AS AVAILABLE" basis. We do not warrant that the app will be uninterrupted, error-free, or completely secure. To the maximum extent permitted by law, OnBars and its creators shall not be liable for any indirect, incidental, or consequential damages arising from your use of the app.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+                7. Governing Law
+              </h2>
+              <p>
+                These terms are governed by the laws of <strong>Greece</strong>. We reserve the right to update these terms at any time. Continued use of the app after updates constitutes your acceptance of the revised terms.
               </p>
             </section>
 
