@@ -5,19 +5,16 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
-  // State για το Mobile Menu
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  // Ξεχωριστά States για να δείξουμε τα μηνύματα επιτυχίας στην κάθε φόρμα
+  // Restored states for email collection
   const [androidFormStatus, setAndroidFormStatus] = useState("");
   const [iosFormStatus, setIosFormStatus] = useState("");
 
-  // States & Refs για το Audio
   const audioRef = useRef(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Αρχικοποίηση του Audio (τρέχει μόνο στον client)
   useEffect(() => {
     audioRef.current = new Audio("/soundtrack.mp3");
     audioRef.current.loop = true; 
@@ -86,7 +83,6 @@ export default function Home() {
 
   const scrollToSection = (e, sectionId) => {
     if (e) e.preventDefault(); 
-    
     setIsMobileMenuOpen(false); 
 
     setTimeout(() => {
@@ -104,7 +100,7 @@ export default function Home() {
     transition: { duration: 0.6 }
   };
 
-  // Direct υποβολή στο δικό μας Next.js API route συνδεδεμένο με Supabase
+  // Restored form submission logic for your Next.js/Supabase backend
   const handleFormSubmit = async (e, platform) => {
     e.preventDefault();
     
@@ -154,13 +150,11 @@ export default function Home() {
           </div>
           
           <div className="flex items-center gap-6">
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
               <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">How it works</a>
               <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white transition-colors cursor-pointer">App</a>
-              <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white transition-colors cursor-pointer">Beta</a>
+              <a href="#download" onClick={(e) => scrollToSection(e, 'download')} className="hover:text-white transition-colors cursor-pointer">Download</a>
               
-              {/* Instagram Link Nav */}
               <a 
                 href="https://instagram.com/onbarsapp" 
                 target="_blank" 
@@ -176,7 +170,6 @@ export default function Home() {
               </a>
             </div>
 
-            {/* AUDIO TOGGLE BUTTON */}
             <button 
               onClick={toggleAudio}
               className="text-cyan-400 hover:text-white transition-colors p-2 rounded-full hover:bg-zinc-800/50"
@@ -197,7 +190,6 @@ export default function Home() {
               )}
             </button>
 
-            {/* Mobile Menu Button */}
             <button 
               className="md:hidden text-gray-400 hover:text-white p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -213,7 +205,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div 
@@ -225,9 +216,8 @@ export default function Home() {
               <div className="flex flex-col px-6 py-4 gap-4 text-sm font-medium text-gray-400">
                 <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white py-2 cursor-pointer">How it works</a>
                 <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white py-2 cursor-pointer">App</a>
-                <a href="#beta" onClick={(e) => scrollToSection(e, 'beta')} className="hover:text-white py-2 cursor-pointer">Beta</a>
+                <a href="#download" onClick={(e) => scrollToSection(e, 'download')} className="hover:text-white py-2 cursor-pointer">Download</a>
                 
-                {/* Instagram Link Mobile */}
                 <a 
                   href="https://instagram.com/onbarsapp" 
                   target="_blank" 
@@ -247,7 +237,6 @@ export default function Home() {
         </AnimatePresence>
       </nav>
 
-      {/* HERO SECTION */}
       <section className="relative flex flex-col items-center justify-center text-center px-6 pt-40 pb-20">
         <motion.div 
           initial={{ scale: 0.8, opacity: 0 }}
@@ -280,7 +269,7 @@ export default function Home() {
           className="px-4 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-8"
           {...fadeIn}
         >
-          Open Beta Now Live
+          Available Now
         </motion.div>
 
         <motion.p 
@@ -292,30 +281,28 @@ export default function Home() {
           and compete with other athletes by spreading your <span className="text-white font-semibold italic">Aura</span> across the map.
         </motion.p>
 
-        {/* HERO BUTTONS */}
         <motion.div 
           className="flex flex-col sm:flex-row gap-4"
           {...fadeIn}
           transition={{ delay: 0.3 }}
         >
           <a
-            href="#beta"
-            onClick={(e) => scrollToSection(e, 'beta')}
+            href="#download"
+            onClick={(e) => scrollToSection(e, 'download')}
             className="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-green-400 hover:shadow-[0_0_25px_rgba(34,211,0,0.6)] transition-all transform hover:scale-105 active:scale-95"
           >
-            Get Android Beta
+            Get it on Android
           </a>
           <a 
-            href="#beta"
-            onClick={(e) => scrollToSection(e, 'beta')}
+            href="#download"
+            onClick={(e) => scrollToSection(e, 'download')}
             className="bg-zinc-900 border border-zinc-700 text-white px-8 py-4 rounded-2xl font-bold hover:border-cyan-500 hover:shadow-[0_0_25px_rgba(34,211,234,0.6)] transition-all transform hover:scale-105 active:scale-95"
           >
-            Get iOS Beta
+            Get it on iOS
           </a>
         </motion.div>
       </section>
 
-      {/* STATS STRIP */}
       <motion.div 
         className="border-y border-zinc-800/50 bg-zinc-900/30 backdrop-blur-sm py-12 my-10"
         initial={{ opacity: 0 }}
@@ -332,7 +319,6 @@ export default function Home() {
         </div>
       </motion.div>
 
-      {/* FEATURES */}
       <section id="features" className="max-w-6xl mx-auto px-6 py-24">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
@@ -375,7 +361,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SCREENSHOTS / PREVIEW */}
       <section id="preview" className="px-6 py-24 bg-zinc-900/20">
         <motion.h2 className="text-4xl font-bold text-center mb-16" {...fadeIn}>
           App Preview
@@ -413,18 +398,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BETA SIGNUP SECTION */}
-      <section id="beta" className="max-w-5xl mx-auto px-6 py-32 text-center">
+      {/* DOWNLOAD SECTION WITH EMAIL GATES RESTORED */}
+      <section id="download" className="max-w-5xl mx-auto px-6 py-32 text-center">
         <motion.div 
           className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 p-8 md:p-12 rounded-[3rem] relative overflow-hidden"
           {...fadeIn}
         >
-          {/* Subtle Background Glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-blue-500/20 blur-[80px] -z-10"></div>
           
-          <h2 className="text-4xl font-bold mb-4 tracking-tight">Join the Beta</h2>
+          <h2 className="text-4xl font-bold mb-4 tracking-tight">Join the First Users</h2>
           <p className="text-gray-400 max-w-xl mx-auto mb-12 text-sm md:text-base">
-            Select your platform below to get instant access, install the app, and start spreading your Aura.
+            Enter your email below to unlock immediate access. Track your reps, claim local parks, and connect with athletes nearby.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left items-stretch">
@@ -436,15 +420,13 @@ export default function Home() {
                   <span className="px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">
                     Android
                   </span>
-                  <span className="text-xs text-gray-500 font-medium">Limited spots</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">Google Play Store</h3>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  Enter your Google Play email below to unlock the direct download link and join the Open Beta.
+                  Enter your email to unlock the direct download link and join the community.
                 </p>
               </div>
 
-              {/* Form Status Content for Android */}
               <div className="mt-auto">
                 {androidFormStatus === "success" ? (
                   <motion.div 
@@ -465,15 +447,12 @@ export default function Home() {
                     </a>
                   </motion.div>
                 ) : (
-                  <form
-                    onSubmit={(e) => handleFormSubmit(e, 'Android')}
-                    className="flex flex-col gap-3"
-                  >
+                  <form onSubmit={(e) => handleFormSubmit(e, 'Android')} className="flex flex-col gap-3">
                     <input
                       type="email"
                       name="email"
                       required
-                      placeholder="Enter your Google Play email"
+                      placeholder="Enter your email address"
                       className="w-full px-5 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 text-white outline-none focus:border-green-500 transition-all text-sm"
                     />
                     <button
@@ -481,7 +460,7 @@ export default function Home() {
                       disabled={androidFormStatus === "submitting"}
                       className="w-full bg-zinc-800 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-green-500 hover:text-black hover:border-green-500 transition-all disabled:opacity-50 text-sm"
                     >
-                      {androidFormStatus === "submitting" ? "Processing..." : "Unlock Android Access"}
+                      {androidFormStatus === "submitting" ? "Processing..." : "Unlock Android Download"}
                     </button>
                     {androidFormStatus === "error" && (
                       <p className="text-red-400 text-xs mt-1 text-center font-medium">
@@ -493,22 +472,21 @@ export default function Home() {
               </div>
             </div>
 
-            {/* IOS BLOCK */}
+           {/* IOS BLOCK */}
             <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <span className="px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider">
                     iOS
                   </span>
-                  <span className="text-xs text-gray-500 font-medium">Limited spots</span>
+                  <span className="text-xs text-gray-500 font-medium">Early Access</span>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">Apple TestFlight</h3>
+                <h3 className="text-2xl font-bold text-white mb-3">App Store</h3>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  Enter your Apple ID email below to unlock immediate access to our TestFlight track and receive early feature notifications.
+                  Enter your email below to unlock immediate early access to OnBars for iPhone.
                 </p>
               </div>
 
-              {/* Form Status Content for iOS */}
               <div className="mt-auto">
                 {iosFormStatus === "success" ? (
                   <motion.div 
@@ -519,20 +497,18 @@ export default function Home() {
                     <div className="p-4 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl text-center">
                       <p className="text-cyan-400 text-sm font-semibold">Welcome to OnBars! ⚡</p>
                     </div>
+                    {/* TestFlight link remains here, but the button text is cleaner */}
                     <a 
                       href="https://testflight.apple.com/join/f4DafGEU"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block w-full text-center bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-4 rounded-xl font-bold hover:shadow-[0_0_25px_rgba(34,211,234,0.4)] transition-all text-sm transform active:scale-95"
                     >
-                      Download via TestFlight
+                      Download for iOS
                     </a>
                   </motion.div>
                 ) : (
-                  <form
-                    onSubmit={(e) => handleFormSubmit(e, 'iOS')}
-                    className="flex flex-col gap-3"
-                  >
+                  <form onSubmit={(e) => handleFormSubmit(e, 'iOS')} className="flex flex-col gap-3">
                     <input
                       type="email"
                       name="email"
@@ -545,7 +521,7 @@ export default function Home() {
                       disabled={iosFormStatus === "submitting"}
                       className="w-full bg-zinc-800 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all disabled:opacity-50 text-sm"
                     >
-                      {iosFormStatus === "submitting" ? "Processing..." : "Unlock iOS Access"}
+                      {iosFormStatus === "submitting" ? "Processing..." : "Unlock iOS Download"}
                     </button>
                     {iosFormStatus === "error" && (
                       <p className="text-red-400 text-xs mt-1 text-center font-medium">
@@ -561,18 +537,16 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ABOUT */}
       <section className="max-w-3xl mx-auto px-6 pb-32 text-center opacity-80">
         <h2 className="text-2xl font-bold mb-6">About OnBars</h2>
         <p className="text-gray-500 leading-relaxed italic">
           <strong className="text-white">OnBars</strong> started with a simple goal: build the ultimate calisthenics app for athletes training on bars around the world. 
           We wanted more than just a workout tracker — we wanted a platform where athletes can discover calisthenics parks, track their progress and connect with the global calisthenics community. 
           OnBars is also designed to feel like a game. Level up your Aura and compete with other athletes by claiming calisthenics parks and spreading your Aura across the map. 
-          We’ve poured our passion, time and soul into building this project, and during the beta your feedback will help shape the future of <strong className="text-white">OnBars</strong>.
+          We’ve poured our passion, time and soul into building this project, and your continuous feedback helps shape the future of <strong className="text-white">OnBars</strong>.
         </p>
       </section>
 
-      {/* FOOTER */}
       <footer className="border-t border-zinc-900 pt-16 pb-10 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-gray-500 text-sm">
