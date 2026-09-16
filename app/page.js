@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  // Restored states for email collection
   const [androidFormStatus, setAndroidFormStatus] = useState("");
   const [iosFormStatus, setIosFormStatus] = useState("");
 
@@ -100,7 +99,6 @@ export default function Home() {
     transition: { duration: 0.6 }
   };
 
-  // Restored form submission logic for your Next.js/Supabase backend
   const handleFormSubmit = async (e, platform) => {
     e.preventDefault();
     
@@ -153,6 +151,7 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
               <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white transition-colors cursor-pointer">How it works</a>
               <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white transition-colors cursor-pointer">App</a>
+              <a href="#auras" onClick={(e) => scrollToSection(e, 'auras')} className="hover:text-white transition-colors cursor-pointer">Auras</a>
               <a href="#download" onClick={(e) => scrollToSection(e, 'download')} className="hover:text-white transition-colors cursor-pointer">Download</a>
               
               <a 
@@ -216,6 +215,7 @@ export default function Home() {
               <div className="flex flex-col px-6 py-4 gap-4 text-sm font-medium text-gray-400">
                 <a href="#features" onClick={(e) => scrollToSection(e, 'features')} className="hover:text-white py-2 cursor-pointer">How it works</a>
                 <a href="#preview" onClick={(e) => scrollToSection(e, 'preview')} className="hover:text-white py-2 cursor-pointer">App</a>
+                <a href="#auras" onClick={(e) => scrollToSection(e, 'auras')} className="hover:text-white py-2 cursor-pointer">Auras</a>
                 <a href="#download" onClick={(e) => scrollToSection(e, 'download')} className="hover:text-white py-2 cursor-pointer">Download</a>
                 
                 <a 
@@ -237,7 +237,8 @@ export default function Home() {
         </AnimatePresence>
       </nav>
 
-      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-40 pb-20">
+      {/* HERO SECTION */}
+      <section className="relative flex flex-col items-center justify-center text-center px-6 pt-36 pb-12">
         <motion.div 
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -303,8 +304,9 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* METRIC STRIP */}
       <motion.div 
-        className="border-y border-zinc-800/50 bg-zinc-900/30 backdrop-blur-sm py-12 my-10"
+        className="border-y border-zinc-800/50 bg-zinc-900/30 backdrop-blur-sm py-10 my-6"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -319,7 +321,8 @@ export default function Home() {
         </div>
       </motion.div>
 
-      <section id="features" className="max-w-6xl mx-auto px-6 py-24">
+      {/* FEATURES */}
+      <section id="features" className="max-w-6xl mx-auto px-6 py-20">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { 
@@ -361,48 +364,53 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="preview" className="px-6 py-24 bg-zinc-900/20">
-        <motion.h2 className="text-4xl font-bold text-center mb-16" {...fadeIn}>
-          App Preview
-        </motion.h2>
+      {/* APP PREVIEW */}
+<section id="preview" className="px-6 py-20 bg-zinc-900/20">
+  <motion.h2 className="text-4xl font-bold text-center mb-10 md:mb-16" {...fadeIn}>
+    App Preview
+  </motion.h2>
 
-        <div className="flex overflow-x-auto pb-12 pt-4 snap-x snap-mandatory gap-6 md:gap-12 md:flex-wrap md:justify-center max-w-7xl mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          {[
-            { src: "/screen1.png", color: "from-blue-500 to-cyan-400" },
-            { src: "/screen2.png", color: "from-green-500 to-green-400" },
-            { src: "/screen3.png", color: "from-purple-500 to-purple-400" },
-            { src: "/screen4.png", color: "from-pink-500 to-pink-400" },
-            { src: "/screen5.png", color: "from-blue-500 to-cyan-400" },
-            { src: "/screen6.png", color: "from-green-500 to-green-400" },
-            { src: "/screen7.png", color: "from-purple-500 to-purple-400" },
-            { src: "/screen8.png", color: "from-pink-500 to-pink-400" }
-          ].map((item, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -15 }}
-              className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0"
-            >
-              <div className={`absolute -inset-1 bg-gradient-to-b ${item.color} rounded-[2.5rem] blur opacity-0 group-hover:opacity-40 transition duration-500`}></div>
-              
-              <Image
-                src={item.src}
-                alt={`Preview ${i+1}`}
-                width={260}
-                height={520}
-                className="relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-500 group-hover:border-zinc-800"
-              />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+  {/* Added p-6 -m-6 so glow and scale don't get clipped by the container edges */}
+  <div className="flex overflow-x-auto p-6 -m-6 snap-x snap-mandatory gap-6 md:gap-12 md:flex-wrap md:justify-center max-w-7xl mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    {[
+      { src: "/screen1.png", color: "from-blue-500 to-cyan-400" },
+      { src: "/screen2.png", color: "from-green-500 to-green-400" },
+      { src: "/screen3.png", color: "from-purple-500 to-purple-400" },
+      { src: "/screen4.png", color: "from-pink-500 to-pink-400" },
+      { src: "/screen5.png", color: "from-blue-500 to-cyan-400" },
+      { src: "/screen6.png", color: "from-green-500 to-green-400" },
+      { src: "/screen7.png", color: "from-purple-500 to-purple-400" },
+      { src: "/screen8.png", color: "from-pink-500 to-pink-400" }
+    ].map((item, i) => (
+      <motion.div 
+        key={i}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.1 }}
+        whileHover={{ y: -15 }}
+        whileTap={{ scale: 0.96, y: -5 }}
+        onContextMenu={(e) => e.preventDefault()}
+        className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0 select-none [webkit-tap-highlight-color:transparent] [webkit-touch-callout:none]"
+      >
+        <div className={`absolute -inset-1 bg-gradient-to-b ${item.color} rounded-[2.5rem] blur opacity-0 group-hover:opacity-40 group-active:opacity-60 transition duration-300`}></div>
+        
+        <Image
+          src={item.src}
+          alt={`Preview ${i+1}`}
+          width={260}
+          height={520}
+          draggable={false}
+          className="relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-300 group-hover:border-zinc-800 group-active:border-zinc-700 pointer-events-none"
+        />
+      </motion.div>
+    ))}
+  </div>
+</section>
 
-
-       <section id="auras" className="px-6 py-24 bg-zinc-900/20">
-  <motion.h2 className="text-4xl font-bold text-center mb-16" {...fadeIn}>
+      {/* AURA TYPES */}
+<section id="auras" className="px-6 py-20 bg-transparent">
+  <motion.h2 className="text-4xl font-bold text-center mb-10 md:mb-16" {...fadeIn}>
     Aura Types
   </motion.h2>
 
@@ -421,24 +429,26 @@ export default function Home() {
         transition={{ delay: i * 0.1 }}
         whileHover={{ y: -15 }}
         whileTap={{ scale: 0.96, y: -5 }}
-        className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0 select-none [webkit-tap-highlight-color:transparent]"
+        onContextMenu={(e) => e.preventDefault()}
+        className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0 select-none [webkit-tap-highlight-color:transparent] [webkit-touch-callout:none]"
       >
         <div className={`absolute -inset-1 bg-gradient-to-b ${item.color} rounded-[2.5rem] blur opacity-0 group-hover:opacity-40 group-active:opacity-60 transition duration-300`}></div>
         
         <Image
           src={item.src}
-          alt={`Preview ${i+1}`}
+          alt={`Aura Preview ${i+1}`}
           width={260}
           height={520}
-          className="relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-300 group-hover:border-zinc-800 group-active:border-zinc-700"
+          draggable={false}
+          className="relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-300 group-hover:border-zinc-800 group-active:border-zinc-700 pointer-events-none"
         />
       </motion.div>
     ))}
   </div>
 </section>
 
-      {/* DOWNLOAD SECTION WITH EMAIL GATES RESTORED */}
-      <section id="download" className="max-w-5xl mx-auto px-6 py-32 text-center">
+      {/* DOWNLOAD SECTION */}
+      <section id="download" className="max-w-5xl mx-auto px-6 py-24 text-center">
         <motion.div 
           className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 p-8 md:p-12 rounded-[3rem] relative overflow-hidden"
           {...fadeIn}
@@ -511,7 +521,7 @@ export default function Home() {
               </div>
             </div>
 
-           {/* IOS BLOCK */}
+            {/* IOS BLOCK */}
             <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
               <div>
                 <div className="flex items-center gap-3 mb-4">
@@ -536,7 +546,6 @@ export default function Home() {
                     <div className="p-4 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl text-center">
                       <p className="text-cyan-400 text-sm font-semibold">Welcome to OnBars! ⚡</p>
                     </div>
-                    {/* TestFlight link remains here, but the button text is cleaner */}
                     <a 
                       href="https://testflight.apple.com/join/f4DafGEU"
                       target="_blank"
@@ -576,7 +585,8 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="max-w-3xl mx-auto px-6 pb-32 text-center opacity-80">
+      {/* ABOUT SECTION */}
+      <section id="about" className="max-w-3xl mx-auto px-6 pb-24 text-center opacity-80">
         <h2 className="text-2xl font-bold mb-6">About OnBars</h2>
         <p className="text-gray-500 leading-relaxed italic">
           <strong className="text-white">OnBars</strong> started with a simple goal: build the ultimate calisthenics app for athletes training on bars around the world. 
@@ -586,6 +596,7 @@ export default function Home() {
         </p>
       </section>
 
+      {/* FOOTER */}
       <footer className="border-t border-zinc-900 pt-16 pb-10 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-gray-500 text-sm">
