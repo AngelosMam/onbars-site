@@ -373,7 +373,9 @@ export default function Home() {
             { src: "/screen3.png", color: "from-purple-500 to-purple-400" },
             { src: "/screen4.png", color: "from-pink-500 to-pink-400" },
             { src: "/screen5.png", color: "from-blue-500 to-cyan-400" },
-            { src: "/screen6.png", color: "from-green-500 to-green-400" }
+            { src: "/screen6.png", color: "from-green-500 to-green-400" },
+            { src: "/screen7.png", color: "from-purple-500 to-purple-400" },
+            { src: "/screen8.png", color: "from-pink-500 to-pink-400" }
           ].map((item, i) => (
             <motion.div 
               key={i}
@@ -397,6 +399,43 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+
+       <section id="auras" className="px-6 py-24 bg-zinc-900/20">
+  <motion.h2 className="text-4xl font-bold text-center mb-16" {...fadeIn}>
+    Aura Types
+  </motion.h2>
+
+  <div className="flex overflow-x-auto p-6 -m-6 snap-x snap-mandatory gap-6 md:gap-10 md:flex-wrap md:justify-center max-w-7xl mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    {[
+      { src: "/PHOENIX.png", color: "from-pink-500 to-pink-400" },
+      { src: "/POSEIDON.png", color: "from-blue-500 to-cyan-400" },
+      { src: "/PHANTOM.png", color: "from-purple-500 to-purple-400" },
+      { src: "/PRIMAL.png", color: "from-green-500 to-green-400" }
+    ].map((item, i) => (
+      <motion.div 
+        key={i}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.1 }}
+        whileHover={{ y: -15 }}
+        whileTap={{ scale: 0.96, y: -5 }}
+        className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0 select-none [webkit-tap-highlight-color:transparent]"
+      >
+        <div className={`absolute -inset-1 bg-gradient-to-b ${item.color} rounded-[2.5rem] blur opacity-0 group-hover:opacity-40 group-active:opacity-60 transition duration-300`}></div>
+        
+        <Image
+          src={item.src}
+          alt={`Preview ${i+1}`}
+          width={260}
+          height={520}
+          className="relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-300 group-hover:border-zinc-800 group-active:border-zinc-700"
+        />
+      </motion.div>
+    ))}
+  </div>
+</section>
 
       {/* DOWNLOAD SECTION WITH EMAIL GATES RESTORED */}
       <section id="download" className="max-w-5xl mx-auto px-6 py-32 text-center">
