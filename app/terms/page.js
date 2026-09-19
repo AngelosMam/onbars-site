@@ -65,6 +65,9 @@ export default function Terms() {
               <p className="mt-4">
                 <strong>Reporting & Blocking:</strong> Users can flag inappropriate content and block abusive users directly within the app. OnBars reserves the right to review flagged content and suspend or permanently terminate accounts violating these terms, without prior notice.
               </p>
+              <p className="mt-4">
+                We review reports and act on objectionable content within 24 hours by removing the content and, where appropriate, suspending the offending account. To report an issue or contact us: <a href="mailto:contact@onbarsapp.com" className="text-cyan-400 hover:underline">contact@onbarsapp.com</a>.
+              </p>
             </section>
 
             <section>

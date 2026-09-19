@@ -46,21 +46,22 @@ export default function Privacy() {
                 1. Information We Collect
               </h2>
               <ul className="list-disc pl-5 space-y-2">
-                <li><strong>Account Data:</strong> Email address, hashed passwords, or third-party authentication data (e.g., Apple/Google Identity).</li>
-                <li><strong>Profile & Performance Data:</strong> Username, date of birth (strictly for age verification), bodyweight, gender, and workout performance metrics.</li>
-                <li><strong>User-Generated Content:</strong> Workouts, sessions, park check-ins, ratings, and social feed posts.</li>
+                <li><strong>Account Data:</strong> Email address, username, and third-party authentication data if you sign in with Apple or Google. Passwords are stored hashed by our authentication provider.</li>
+                <li><strong>Profile Data:</strong> Profile photo, bio, and optionally date of birth, gender, height, bodyweight and experience level, used to personalize your profile and workout statistics. You can edit or delete this data at any time.</li>
+                <li><strong>Location Data:</strong> See section 2. Your last known location is stored in your profile to power "nearby" features.</li>
+                <li><strong>User-Generated Content:</strong> Workouts, sessions, park check-ins, ratings, comments, photos, video stories and feed posts.</li>
+                <li><strong>Technical Data:</strong> A push notification token identifying your device for notifications.</li>
               </ul>
             </section>
 
-          <section>
+            <section>
               <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
                 2. Device Permissions
               </h2>
               <p>To provide core features, OnBars may request the following device permissions with your explicit consent:</p>
               <ul className="list-disc pl-5 mt-2 space-y-2">
-                <li><strong>Location Services:</strong> Used to display outdoor gyms near you, verify park check-ins, and update the interactive map. Location data is not continuously tracked in the background.</li>
-                <li><strong>Camera & Photo Library:</strong> Used strictly to allow you to upload profile avatars, capture and post workout images or video stories to the feed, and submit photos or videos of new calisthenics parks.</li>
-                {/* Remove the Microphone line if you don't actually request mic access! */}
+                <li><strong>Location Services:</strong> Used to display outdoor gyms near you, verify park check-ins, and update the interactive map. Your last known location is stored in your profile for "nearby" features; you can control your visibility in the app's privacy settings. During an active workout, OnBars checks your location periodically, including while the app is in the background, solely to detect if you move away from the selected park. Background location is not used outside of an active workout, is not used for advertising, and is not sold or shared.</li>
+                <li><strong>Camera & Photo Library:</strong> Used strictly to allow you to upload profile avatars, capture and post workout images or video stories to the feed, submit photos or videos of new calisthenics parks, and to save exported workout stories to your camera roll.</li>
                 <li><strong>Microphone:</strong> Used exclusively when recording audio alongside your video stories. We do not listen to or record audio in the background.</li>
                 <li><strong>Push Notifications:</strong> Used to alert you about community interactions, new followers, updates to your Aura, and activity at your claimed parks. You can manage or disable these at any time in your device settings.</li>
               </ul>
@@ -80,13 +81,16 @@ export default function Privacy() {
                 4. Data Storage & Processors
               </h2>
               <p>
-                Your data is securely stored using trusted third-party service providers acting as data processors, including:
+                Your data is handled by service providers acting as data processors:
               </p>
               <ul className="list-disc pl-5 mt-2 space-y-2">
-                <li><strong>Supabase:</strong> For secure database hosting, user authentication, and media storage.</li>
-                <li><strong>Map Providers (e.g., Mapbox):</strong> To render maps and process geographical coordinates for park discovery.</li>
+                <li><strong>Supabase:</strong> Database hosting, authentication and media storage.</li>
+                <li><strong>Google Firebase (Cloud Messaging):</strong> Delivery of push notifications.</li>
+                <li><strong>Mapbox:</strong> Map rendering and geographical data for park discovery.</li>
+                <li><strong>Open-Meteo:</strong> Receives your coordinates to display local weather.</li>
+                <li><strong>Apple and Google:</strong> Only if you choose to sign in with them.</li>
               </ul>
-              <p className="mt-4">These providers comply with stringent data protection laws and do not use your personal data for their own marketing purposes.</p>
+              <p className="mt-4">We do not sell your personal data and we do not track you across other apps or websites.</p>
             </section>
 
             <section>
@@ -94,7 +98,7 @@ export default function Privacy() {
                 5. Data Retention & Account Deletion
               </h2>
               <p>
-                We retain your account data for as long as your account is active. You have the right to delete your account and all associated data at any time <strong>directly inside the app settings</strong>. Upon deletion, your personal data, media, and workout history are permanently erased from our databases.
+                We retain your account data for as long as your account is active. You have the right to delete your account and all associated data at any time directly inside the app settings (<strong>Settings → Account & Security → Delete Account</strong>). Upon deletion, your personal data, media, and workout history are permanently erased from our databases.
               </p>
             </section>
 
@@ -122,6 +126,24 @@ export default function Privacy() {
               </h2>
               <p>
                 If you have questions regarding this privacy policy, wish to exercise your rights, or have concerns about your data, please contact us at: <a href="mailto:contact@onbarsapp.com" className="text-cyan-400 hover:underline">contact@onbarsapp.com</a>
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+                9. International Transfers
+              </h2>
+              <p>
+                Some of our providers may process data outside the European Economic Area (for example in the USA). Where this happens, transfers rely on appropriate safeguards such as the EU Standard Contractual Clauses.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-white mb-4 border-b border-zinc-800 pb-2">
+                10. Data Controller & Complaints
+              </h2>
+              <p>
+                The data controller is OnBars, Greece, <a href="mailto:contact@onbarsapp.com" className="text-cyan-400 hover:underline">contact@onbarsapp.com</a>. If you are in the EEA, you have the right to lodge a complaint with your local data protection authority (in Greece: the Hellenic Data Protection Authority, <a href="https://www.dpa.gr" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">dpa.gr</a>).
               </p>
             </section>
           </div>
