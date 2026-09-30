@@ -448,142 +448,79 @@ export default function Home() {
 </section>
 
       {/* DOWNLOAD SECTION */}
-      <section id="download" className="max-w-5xl mx-auto px-6 py-24 text-center">
-        <motion.div 
-          className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 p-8 md:p-12 rounded-[3rem] relative overflow-hidden"
-          {...fadeIn}
-        >
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-blue-500/20 blur-[80px] -z-10"></div>
-          
-          <h2 className="text-4xl font-bold mb-4 tracking-tight">Join the First Users</h2>
-          <p className="text-gray-400 max-w-xl mx-auto mb-12 text-sm md:text-base">
-            Enter your email below to unlock immediate access. Track your reps, claim local parks, and connect with athletes nearby.
-          </p>
+<section id="download" className="max-w-5xl mx-auto px-6 py-24 text-center">
+  <motion.div 
+    className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 p-8 md:p-12 rounded-[3rem] relative overflow-hidden"
+    {...fadeIn}
+  >
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-blue-500/20 blur-[80px] -z-10"></div>
+    
+    <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+      Download OnBars Today
+    </h2>
+    <p className="text-gray-400 max-w-xl mx-auto mb-10 text-sm md:text-base leading-relaxed">
+      Find local calisthenics spots, track your workouts, level up your Aura, and claim your local bars. Available now on iOS & Android.
+    </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left items-stretch">
-            
-            {/* ANDROID BLOCK */}
-            <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">
-                    Android
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">Google Play Store</h3>
-                <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  Enter your email to unlock the direct download link and join the community.
-                </p>
-              </div>
-
-              <div className="mt-auto">
-                {androidFormStatus === "success" ? (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }} 
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="space-y-4"
-                  >
-                    <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-2xl text-center">
-                      <p className="text-green-400 text-sm font-semibold">Welcome to OnBars! ⚡</p>
-                    </div>
-                    <a 
-                      href="https://play.google.com/store/apps/details?id=com.people.on.bars"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full text-center bg-white text-black px-6 py-4 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95"
-                    >
-                      Download on Google Play
-                    </a>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={(e) => handleFormSubmit(e, 'Android')} className="flex flex-col gap-3">
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="Enter your email address"
-                      className="w-full px-5 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 text-white outline-none focus:border-green-500 transition-all text-sm"
-                    />
-                    <button
-                      type="submit"
-                      disabled={androidFormStatus === "submitting"}
-                      className="w-full bg-zinc-800 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-green-500 hover:text-black hover:border-green-500 transition-all disabled:opacity-50 text-sm"
-                    >
-                      {androidFormStatus === "submitting" ? "Processing..." : "Unlock Android Download"}
-                    </button>
-                    {androidFormStatus === "error" && (
-                      <p className="text-red-400 text-xs mt-1 text-center font-medium">
-                        Oops! Something went wrong. Please try again.
-                      </p>
-                    )}
-                  </form>
-                )}
-              </div>
-            </div>
-
-            {/* IOS BLOCK */}
-            <div className="bg-zinc-950/50 border border-zinc-800/80 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider">
-                    iOS
-                  </span>
-                  <span className="text-xs text-gray-500 font-medium">Early Access</span>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">App Store</h3>
-                <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  Enter your email below to unlock immediate early access to OnBars for iPhone.
-                </p>
-              </div>
-
-              <div className="mt-auto">
-                {iosFormStatus === "success" ? (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }} 
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="space-y-4"
-                  >
-                    <div className="p-4 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl text-center">
-                      <p className="text-cyan-400 text-sm font-semibold">Welcome to OnBars! ⚡</p>
-                    </div>
-                    <a 
-                      href="https://testflight.apple.com/join/f4DafGEU"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full text-center bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-4 rounded-xl font-bold hover:shadow-[0_0_25px_rgba(34,211,234,0.4)] transition-all text-sm transform active:scale-95"
-                    >
-                      Download for iOS
-                    </a>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={(e) => handleFormSubmit(e, 'iOS')} className="flex flex-col gap-3">
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="Enter your Apple ID email"
-                      className="w-full px-5 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 text-white outline-none focus:border-cyan-500 transition-all text-sm"
-                    />
-                    <button
-                      type="submit"
-                      disabled={iosFormStatus === "submitting"}
-                      className="w-full bg-zinc-800 border border-zinc-700 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-cyan-500 hover:text-black hover:border-cyan-500 transition-all disabled:opacity-50 text-sm"
-                    >
-                      {iosFormStatus === "submitting" ? "Processing..." : "Unlock iOS Download"}
-                    </button>
-                    {iosFormStatus === "error" && (
-                      <p className="text-red-400 text-xs mt-1 text-center font-medium">
-                        Oops! Something went wrong. Please try again.
-                      </p>
-                    )}
-                  </form>
-                )}
-              </div>
-            </div>
-
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      
+      {/* ANDROID BLOCK */}
+      <div className="bg-zinc-950/60 border border-zinc-800 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm hover:border-green-500/50 transition-all">
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <span className="px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">
+              Android
+            </span>
+            <span className="text-xs text-green-400 font-medium flex items-center gap-1">
+              ● Live on Google Play
+            </span>
           </div>
-        </motion.div>
-      </section>
+          <h3 className="text-2xl font-bold text-white mb-2 text-left">Google Play</h3>
+          <p className="text-gray-400 text-sm mb-6 leading-relaxed text-left">
+            Get OnBars for Android devices and start mapping your spots.
+          </p>
+        </div>
+
+        <a 
+          href="https://play.google.com/store/apps/details?id=com.people.on.bars"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full text-center bg-white text-black px-6 py-4 rounded-xl font-bold hover:bg-green-400 hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95 block"
+        >
+          Download on Google Play
+        </a>
+      </div>
+
+      {/* IOS BLOCK */}
+      <div className="bg-zinc-950/60 border border-zinc-800 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm hover:border-cyan-500/50 transition-all">
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <span className="px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-bold uppercase tracking-wider">
+              iOS
+            </span>
+            <span className="text-xs text-green-400 font-medium flex items-center gap-1">
+              ● Live on App Store
+            </span>
+          </div>
+          <h3 className="text-2xl font-bold text-white mb-2 text-left">App Store</h3>
+          <p className="text-gray-400 text-sm mb-6 leading-relaxed text-left">
+            Get OnBars for iPhone and join the global street workout movement.
+          </p>
+        </div>
+
+        <a 
+          href="https://apps.apple.com/app/onbars/id6772950325"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full text-center bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-4 rounded-xl font-bold hover:shadow-[0_0_25px_rgba(34,211,234,0.4)] transition-all text-sm transform active:scale-95 block"
+        >
+          Download on App Store
+        </a>
+      </div>
+
+    </div>
+  </motion.div>
+</section>
 
       {/* ABOUT SECTION */}
       <section id="about" className="max-w-3xl mx-auto px-6 pb-24 text-center opacity-80">

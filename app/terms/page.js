@@ -31,7 +31,7 @@ export default function Terms() {
           </h1>
           
           <p className="text-cyan-500 font-bold text-xs tracking-[0.2em] uppercase mb-12">
-            Last updated: {new Date().getFullYear()}
+            Last updated: September 10, 2026
           </p>
 
           <div className="space-y-10 text-gray-300 leading-relaxed text-lg">
