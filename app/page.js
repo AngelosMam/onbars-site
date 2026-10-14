@@ -364,51 +364,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* APP PREVIEW */}
+   {/* APP PREVIEW */}
 <section id="preview" className="px-6 py-20 bg-zinc-900/20">
   <motion.h2 className="text-4xl font-bold text-center mb-10 md:mb-16" {...fadeIn}>
     App Preview
   </motion.h2>
 
-  {/* Added p-6 -m-6 so glow and scale don't get clipped by the container edges */}
   <div className="flex overflow-x-auto p-6 -m-6 snap-x snap-mandatory gap-6 md:gap-12 md:flex-wrap md:justify-center max-w-7xl mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
     {[
-      { src: "/screen1.png", color: "from-blue-500 to-cyan-400" },
-      { src: "/screen2.png", color: "from-green-500 to-green-400" },
-      { src: "/screen3.png", color: "from-purple-500 to-purple-400" },
-      { src: "/screen4.png", color: "from-pink-500 to-pink-400" },
-      { src: "/screen5.png", color: "from-blue-500 to-cyan-400" },
-      { src: "/screen6.png", color: "from-green-500 to-green-400" },
-      { src: "/screen7.png", color: "from-purple-500 to-purple-400" },
-      { src: "/screen8.png", color: "from-pink-500 to-pink-400" }
+      { src: "/screen1.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(59,130,246,0.6)]" },
+      { src: "/screen2.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(34,197,94,0.6)]" },
+      { src: "/screen3.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(168,85,247,0.6)]" },
+      { src: "/screen4.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(236,72,153,0.6)]" },
+      { src: "/screen5.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(59,130,246,0.6)]" },
+      { src: "/screen6.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(34,197,94,0.6)]" },
+      { src: "/screen7.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(168,85,247,0.6)]" },
+      { src: "/screen8.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(236,72,153,0.6)]" }
     ].map((item, i) => (
       <motion.div 
         key={i}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: i * 0.1 }}
-        whileHover={{ y: -15 }}
-        whileTap={{ scale: 0.96, y: -5 }}
+        transition={{ delay: i * 0.08 }}
+        whileHover={{ y: -8 }}
         onContextMenu={(e) => e.preventDefault()}
-        className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0 select-none [webkit-tap-highlight-color:transparent] [webkit-touch-callout:none]"
+        className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0 select-none [webkit-tap-highlight-color:transparent]"
       >
-        <div className={`absolute -inset-1 bg-gradient-to-b ${item.color} rounded-[2.5rem] blur opacity-0 group-hover:opacity-40 group-active:opacity-60 transition duration-300`}></div>
-        
         <Image
           src={item.src}
           alt={`Preview ${i+1}`}
           width={260}
           height={520}
           draggable={false}
-          className="relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-300 group-hover:border-zinc-800 group-active:border-zinc-700 pointer-events-none"
+          className={`relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-300 group-hover:border-zinc-800 pointer-events-none ${item.shadow}`}
         />
       </motion.div>
     ))}
   </div>
 </section>
 
-      {/* AURA TYPES */}
+{/* AURA TYPES */}
 <section id="auras" className="px-6 py-20 bg-transparent">
   <motion.h2 className="text-4xl font-bold text-center mb-10 md:mb-16" {...fadeIn}>
     Aura Types
@@ -416,38 +412,36 @@ export default function Home() {
 
   <div className="flex overflow-x-auto p-6 -m-6 snap-x snap-mandatory gap-6 md:gap-10 md:flex-wrap md:justify-center max-w-7xl mx-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
     {[
-      { src: "/PHOENIX.png", color: "from-pink-500 to-pink-400" },
-      { src: "/POSEIDON.png", color: "from-blue-500 to-cyan-400" },
-      { src: "/PHANTOM.png", color: "from-purple-500 to-purple-400" },
-      { src: "/PRIMAL.png", color: "from-green-500 to-green-400" }
+      { src: "/PHOENIX.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(236,72,153,0.6)]" },
+      { src: "/POSEIDON.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(59,130,246,0.6)]" },
+      { src: "/PHANTOM.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(168,85,247,0.6)]" },
+      { src: "/PRIMAL.png", shadow: "group-hover:drop-shadow-[0_0_30px_rgba(34,197,94,0.6)]" }
     ].map((item, i) => (
       <motion.div 
         key={i}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: i * 0.1 }}
-        whileHover={{ y: -15 }}
-        whileTap={{ scale: 0.96, y: -5 }}
+        transition={{ delay: i * 0.08 }}
+        whileHover={{ y: -8 }}
         onContextMenu={(e) => e.preventDefault()}
-        className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0 select-none [webkit-tap-highlight-color:transparent] [webkit-touch-callout:none]"
+        className="relative group cursor-pointer shrink-0 snap-center first:ml-4 last:mr-4 md:first:ml-0 md:last:mr-0 select-none [webkit-tap-highlight-color:transparent]"
       >
-        <div className={`absolute -inset-1 bg-gradient-to-b ${item.color} rounded-[2.5rem] blur opacity-0 group-hover:opacity-40 group-active:opacity-60 transition duration-300`}></div>
-        
         <Image
           src={item.src}
           alt={`Aura Preview ${i+1}`}
           width={260}
           height={520}
           draggable={false}
-          className="relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-300 group-hover:border-zinc-800 group-active:border-zinc-700 pointer-events-none"
+          className={`relative rounded-[2rem] border-[6px] border-zinc-900 shadow-2xl transition-all duration-300 group-hover:border-zinc-800 pointer-events-none ${item.shadow}`}
         />
       </motion.div>
     ))}
   </div>
 </section>
 
-      {/* DOWNLOAD SECTION */}
+
+{/* DOWNLOAD SECTION */}
 <section id="download" className="max-w-5xl mx-auto px-6 py-24 text-center">
   <motion.div 
     className="bg-gradient-to-b from-zinc-900 to-black border border-zinc-800 p-8 md:p-12 rounded-[3rem] relative overflow-hidden"
@@ -462,61 +456,39 @@ export default function Home() {
       Find local calisthenics spots, track your workouts, level up your Aura, and claim your local bars. Available now on iOS & Android.
     </p>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 max-w-xl mx-auto">
       
-      {/* ANDROID BLOCK */}
-      <div className="bg-zinc-950/60 border border-zinc-800 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm hover:border-green-500/50 transition-all">
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <span className="px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">
-              Android
-            </span>
-            <span className="text-xs text-green-400 font-medium flex items-center gap-1">
-              ● Live on Google Play
-            </span>
-          </div>
-          <h3 className="text-2xl font-bold text-white mb-2 text-left">Google Play</h3>
-          <p className="text-gray-400 text-sm mb-6 leading-relaxed text-left">
-            Get OnBars for Android devices and start mapping your spots.
-          </p>
-        </div>
+      {/* GOOGLE PLAY BUTTON BADGE (GREEN GLOW) */}
+      <a 
+        href="https://play.google.com/store/apps/details?id=com.people.on.bars"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative flex items-center justify-center bg-black border-2 border-white rounded-2xl px-4 py-1.5 transition-all duration-300 transform hover:scale-105 active:scale-95 hover:border-green-400 hover:shadow-[0_0_25px_rgba(34,211,0,0.6)]"
+      >
+        <Image 
+          src="/google-play-badge.png" 
+          alt="Get it on Google Play" 
+          width={220} 
+          height={70} 
+          className="h-14 w-auto object-contain"
+        />
+      </a>
 
-        <a 
-          href="https://play.google.com/store/apps/details?id=com.people.on.bars"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full text-center bg-white text-black px-6 py-4 rounded-xl font-bold hover:bg-green-400 hover:shadow-[0_0_20px_rgba(34,211,0,0.4)] transition-all text-sm transform active:scale-95 block"
-        >
-          Download on Google Play
-        </a>
-      </div>
-
-      {/* IOS BLOCK */}
-      <div className="bg-zinc-950/60 border border-zinc-800 p-8 rounded-3xl flex flex-col justify-between backdrop-blur-sm hover:border-cyan-500/50 transition-all">
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <span className="px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-bold uppercase tracking-wider">
-              iOS
-            </span>
-            <span className="text-xs text-green-400 font-medium flex items-center gap-1">
-              ● Live on App Store
-            </span>
-          </div>
-          <h3 className="text-2xl font-bold text-white mb-2 text-left">App Store</h3>
-          <p className="text-gray-400 text-sm mb-6 leading-relaxed text-left">
-            Get OnBars for iPhone and join the global street workout movement.
-          </p>
-        </div>
-
-        <a 
-          href="https://apps.apple.com/app/onbars/id6772950325"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full text-center bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-4 rounded-xl font-bold hover:shadow-[0_0_25px_rgba(34,211,234,0.4)] transition-all text-sm transform active:scale-95 block"
-        >
-          Download on App Store
-        </a>
-      </div>
+      {/* APP STORE BUTTON BADGE (CYAN/BLUE GLOW) */}
+      <a 
+        href="https://apps.apple.com/app/onbars/id6772950325"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative flex items-center justify-center bg-black border-2 border-white rounded-2xl px-4 py-1.5 transition-all duration-300 transform hover:scale-105 active:scale-95 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(34,211,234,0.6)]"
+      >
+        <Image 
+          src="/app-store-badge.png" 
+          alt="Download on the App Store" 
+          width={220} 
+          height={70} 
+          className="h-14 w-auto object-contain"
+        />
+      </a>
 
     </div>
   </motion.div>
